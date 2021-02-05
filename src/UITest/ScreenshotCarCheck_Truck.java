@@ -18,8 +18,13 @@ public class ScreenshotCarCheck_Truck {
 
 
     public static void main(String[] args) throws Exception {
-        String pathToChromefoxDriver = ".//ChromeDriver//chromedriver";
-        System.setProperty("webdriver.chrome.driver", pathToChromefoxDriver);
+        String pathToChromeforDriver = ".//ChromeDriver//chromedriver";
+        String pathToChrome_Windows = ".//Win_ChromeDriver//chromedriver.exe";
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            System.setProperty("webdriver.chrome.driver", pathToChrome_Windows);
+        } else{
+            System.setProperty("webdriver.chrome.driver", pathToChromeforDriver);
+        }
 
 
         String[] sprache = {UIConstants.PREF_LANGUAGE_DE,  UIConstants.PREF_LANGUAGE_DA, UIConstants.PREF_LANGUAGE_EN,
@@ -31,7 +36,7 @@ public class ScreenshotCarCheck_Truck {
                 UIConstants.PREF_LANGUAGE_EL, UIConstants.PREF_LANGUAGE_JA, UIConstants.PREF_LANGUAGE_KO,
                 UIConstants.PREF_LANGUAGE_RU, UIConstants.PREF_LANGUAGE_ZH, UIConstants.PREF_LANGUAGE_HU};
 
-        for(int i=19;i<sprache.length; i++) {
+        for(int i=22;i<24; i++) {
             ChromeDriver driver = new ChromeDriver();
 
 
@@ -95,7 +100,9 @@ public class ScreenshotCarCheck_Truck {
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(5000);
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.waitForLoadingScreen();
+            Thread.sleep(2000);
             home_page.clickOnLogoutButton();
             Thread.sleep(5000);
 
@@ -111,7 +118,9 @@ public class ScreenshotCarCheck_Truck {
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(5000);
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.waitForLoadingScreen();
+            Thread.sleep(2000);
 
 
 
@@ -127,6 +136,7 @@ public class ScreenshotCarCheck_Truck {
 
             fleet_page.clickOnDataProtectionBanner();
             fleet_page.clickOnCookieBanner();
+            serviceManagement_2_page.closeCookies();
             Thread.sleep(5000);
 
             fleet_page.clickOnInboxIcon();
@@ -135,20 +145,31 @@ public class ScreenshotCarCheck_Truck {
 
 
 
-            driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1301052");
+            driver.get("https://xentry-int2.daimler.com/order/service-reception/141409651");
             carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
 
 
             carCheck_page.clickOnCarCheckReiter();
             carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
             Thread.sleep(1000);
 
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsTruck();
+
             screenshot.madeScreenshot(UIConstants.TC_CHECK_Liste, sprache[i]);
-            carCheck_page.clickOnStartButtonForAllgemeinProtokollCheck();
+            carCheck_page.clickOnStartButton();
             carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             screenshot.madeScreenshot(UIConstants.TC_CHECK_UBERSICHT, sprache[i]);
             carCheck_page.clickOnDreiPunktMenu();
             Thread.sleep(2000);
@@ -158,7 +179,7 @@ public class ScreenshotCarCheck_Truck {
             screenshot.madeScreenshot(UIConstants.TC_CHECK_AUSSENSEITE, sprache[i]);
             carCheck_page.clickOnFahrzeugBeiFahrerTuer();
             Thread.sleep(2000);
-            carCheck_page.scrollDownThePageToFahrzeugAussenSeite();
+            carCheck_page.scrollDownThePageToDell();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_CHECK_AUSSENSEITE_NOK, sprache[i]);
 
@@ -168,35 +189,47 @@ public class ScreenshotCarCheck_Truck {
             carCheck_page.clickOnStiftSymbolForRader();
             Thread.sleep(5000);
             carCheck_page.bereifungChange();
-            Thread.sleep(5000);
-            auftrag_management_page.closeErrorAndHinweis();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
-            carCheck_page.zoomIn();
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
+            carCheck_page.zoomInWithFaktor("0.8");
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_CHECK_RADER, sprache[i]);
             carCheck_page.zoomRelease();
             Thread.sleep(2000);
 
+            carCheck_page.scrollDownThePageToRadOfRadCheckPunkt();
+            Thread.sleep(2000);
+            carCheck_page.zoomInWithFaktor("0.8");
+            screenshot.madeScreenshot(UIConstants.TC_CHECK_RADER_2, sprache[i]);
+            carCheck_page.zoomRelease();
+
+
+
             carCheck_page.clickOnStiftSymbolForRader();
             Thread.sleep(2000);
-            carCheck_page.zoomIn();
-            Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_CHECK_RADER_AENDERUNG_ACHSEN, sprache[i]);
-            carCheck_page.zoomRelease();
-            Thread.sleep(2000);
             carCheck_page.closeDialogForRader();
             Thread.sleep(2000);
-            carCheck_page.scrollDownThePageToRadCheckPunkt_1();
-            Thread.sleep(2000);
             carCheck_page.enterProfilTiefe("1");
-            Thread.sleep(2000);
+            Thread.sleep(000);
             carCheck_page.enterReifenDruck("7,8");
-            Thread.sleep(2000);
+            Thread.sleep(000);
+            carCheck_page.scrollDownThePageToRadCheckPunkt_3();
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             carCheck_page.clickOnCrosshairForProfilTiefe();
             Thread.sleep(2000);
             carCheck_page.positionierenAnReifenLinkVorne();
             Thread.sleep(2000);
-           // carCheck_page.zoomIn();
+          //  carCheck_page.zoomInWithFaktor("0.8");
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_CHECK_RADER_BEFUND_POSITION, sprache[i]);
             carCheck_page.zoomRelease();
@@ -207,24 +240,34 @@ public class ScreenshotCarCheck_Truck {
             Thread.sleep(2000);
             carCheck_page.clickOnReifenLinkVorne();
             Thread.sleep(2000);
-            carCheck_page.scrollDownThePageToRadCheckPunkt_1();
+            carCheck_page.scrollDownThePageToRadOfRadCheckPunkt();
             Thread.sleep(2000);
-           // carCheck_page.zoomIn();
-            Thread.sleep(2000);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             screenshot.madeScreenshot(UIConstants.TC_CHECK_RADER_REIFENDRUCK_ERFASSEN, sprache[i]);
-            carCheck_page.zoomRelease();
             Thread.sleep(2000);
-            carCheck_page.scrollDownThePageToReifen();
+            carCheck_page.scrollDownThePageToRadOfRadCheckPunkt_2();
             Thread.sleep(2000);
             carCheck_page.clickOnXSymbolForReifenCheck_1();
             Thread.sleep(2000);
             carCheck_page.clickOnReifenLinkVorne();
             Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToReifen();
+            Thread.sleep(2000);
             carCheck_page.chooseAktionForReifenBeanstandung();
             Thread.sleep(2000);
             carCheck_page.photoUpload_1();
             carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeError();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToRadCheckPunkt_1();
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             screenshot.madeScreenshot(UIConstants.TC_CHECK_RADER_ZUSTAND_DOKUMENT, sprache[i]);
             //
             carCheck_page.clickOnPhoto();
@@ -233,107 +276,117 @@ public class ScreenshotCarCheck_Truck {
             carCheck_page.closePhotoDetail();
 
             //
-            Thread.sleep(2000);
-            carCheck_page.scrollDownThePageToFahrzeuginnenraum();
-            Thread.sleep(2000);
-            screenshot.madeScreenshot(UIConstants.TC_CHECK_FAHRZEUG_DATEN_AKT, sprache[i]);
-            carCheck_page.clickOnStiftSymbolBeiKilometerStand();
-            Thread.sleep(2000);
-            carCheck_page.clickOnKilometerstandFeld();
-            Thread.sleep(1000);
-            screenshot.madeScreenshot(UIConstants.TC_CHECK_FAHRZEUG_DATEN_EDIT_LAUFLEISTUNG, sprache[i]);
-            carCheck_page.closeKilometerStandDialog();
-            Thread.sleep(2000);
             carCheck_page.scrollDownThePageToFrontscheibe();
             Thread.sleep(2000);
             carCheck_page.clickOnXButtonVonFrontscheibe();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             carCheck_page.beanstandungVonFrontscheibeWahl();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             carCheck_page.clickOnHakeVonWischer();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
+            carCheck_page.clickOnDelegateButtonOnKartenstand();
+            Thread.sleep(1000);
+            carCheck_page.scrollDownThePageToFrontscheibe();
+            Thread.sleep(1000);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             screenshot.madeScreenshot(UIConstants.TC_CHECK_FAHRZEUG_DATEN_FRONT_SCHEIBE_OK_NOK, sprache[i]);
-            carCheck_page.scrollDownThePageToWischBlatt();
-            Thread.sleep(2000);
+
+            carCheck_page.scrollDownThePageToKartedatenstand();
+            Thread.sleep(1000);
             carCheck_page.clickXSymbolVonKartenStand();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
             carCheck_page.aktionVonKartenStandWahl();
             Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToKartedatenstand();
             carCheck_page.clickOnTextKarteStand();
             Thread.sleep(1000);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             screenshot.madeScreenshot(UIConstants.TC_CHECK_FAHRZEUG_DATEN_NAVIGATION, sprache[i]);
             Thread.sleep(2000);
 
 
 
-            //  carCheck_page.checkListDelete();
-            carCheck_page.checkListDelete();
-            carCheck_page.waitForSpinnerNotAppears();
-            carCheck_page.clickOnStartButton();
-            carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            //
 
 
             carCheck_page.scrollDownThePageToWartungdaten();
             Thread.sleep(2000);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             carCheck_page.clickOnStiftSymbolForWartungdaten();
             Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
+            carCheck_page.closeErrorAndHinweis();
             Thread.sleep(1000);
             carCheck_page.wartungKanalWahl();
             Thread.sleep(2000);
             carCheck_page.scrollDownThePageInWartung();
             Thread.sleep(2000);
-            carCheck_page.zoomIn_3();
+
+
+
+            carCheck_page.zoomInWithFaktor("0.8");
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_CHECK_WARTUNG_AKT, sprache[i]);
             carCheck_page.zoomRelease();
             Thread.sleep(2000);
             carCheck_page.closeWartungKanal();
             Thread.sleep(2000);
-            carCheck_page.checkListDelete();
-            carCheck_page.waitForSpinnerNotAppears();
-            kundendialog_page.closeVorgang();
-            carCheck_page.waitForSpinnerNotAppears();
-            //Neue Vorgang öffnen
-            driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1386609");
-            carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
 
-
-            carCheck_page.clickOnCarCheckReiter();
-            carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(1000);
-            carCheck_page.clickOnStartButton();
-            carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            carCheck_page.scrollDownThePageToWartungdaten();
-            ///
-
-          //  carCheck_page.hakenRausnehmenVonKurztest_1();
-          //  Thread.sleep(2000);
-          //  auftrag_management_page.closeErrorAndHinweis();
+            carCheck_page.hakenRausnehmenVonKurztest();
             Thread.sleep(2000);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
             carCheck_page.clickOnStiftSymbolForWartungdaten();
             Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
+            carCheck_page.closeErrorAndHinweis();
             Thread.sleep(1000);
             carCheck_page.wartungKanalWahl_2();
             Thread.sleep(2000);
-            carCheck_page.zoomIn_2();
+            carCheck_page.clickOnTextWartung();
+            carCheck_page.zoomInWithFaktor("0.8");
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_CHECK_WARTUNG_MANUELL, sprache[i]);
             carCheck_page.zoomRelease();
             Thread.sleep(2000);
             carCheck_page.closeWartungKanal();
             Thread.sleep(2000);
-          //  carCheck_page.hakenSetzenVonKurztest_1();
-          //  Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
             Thread.sleep(2000);
             carCheck_page.checkListDelete();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.waitForSpinnerNotAppears();
+
+            carCheck_page.clickOnStartButtonForAllgemeinProtokollCheck();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.closeErrorAndHinweis();
+
+            carCheck_page.kurztestZuweisen();
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToFahrzeuginnenraum();
+            Thread.sleep(2000);
+
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
+            carCheck_page.zoomInWithFaktor("0.9");
+            screenshot.madeScreenshot(UIConstants.TC_CHECK_FAHRZEUG_DATEN_AKT, sprache[i]);
+            carCheck_page.zoomRelease();
+
+            carCheck_page.checkListDelete();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.waitForSpinnerNotAppears();
+
 
             driver.quit();
         }

@@ -19,8 +19,13 @@ public class HelpCardTablet_PKW {
 
 
     public static void main(String[] args) throws Exception {
-        String pathToChromefoxDriver = ".//ChromeDriver//chromedriver";
-        System.setProperty("webdriver.chrome.driver", pathToChromefoxDriver);
+        String pathToChromeforDriver = ".//ChromeDriver//chromedriver";
+        String pathToChrome_Windows = ".//Win_ChromeDriver//chromedriver.exe";
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            System.setProperty("webdriver.chrome.driver", pathToChrome_Windows);
+        } else{
+            System.setProperty("webdriver.chrome.driver", pathToChromeforDriver);
+        }
 
         String[] sprache = {UIConstants.PREF_LANGUAGE_DE,  UIConstants.PREF_LANGUAGE_DA, UIConstants.PREF_LANGUAGE_EN,
                             UIConstants.PREF_LANGUAGE_ES, UIConstants.PREF_LANGUAGE_FI, UIConstants.PREF_LANGUAGE_FR,
@@ -31,8 +36,8 @@ public class HelpCardTablet_PKW {
                             UIConstants.PREF_LANGUAGE_RO, UIConstants.PREF_LANGUAGE_RU, UIConstants.PREF_LANGUAGE_SK,
                             UIConstants.PREF_LANGUAGE_TR, UIConstants.PREF_LANGUAGE_ZH,UIConstants.PREF_LANGUAGE_HU};
 
-        for(int i=12;i<sprache.length; i++) {
-
+        for(int i=1;i<sprache.length; i++) {
+/*
             Map<String, String> mobileEmulation = new HashMap<>();
 
             mobileEmulation.put("deviceName", "iPad Pro");
@@ -42,7 +47,8 @@ public class HelpCardTablet_PKW {
             chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
 
             driver = new ChromeDriver(chromeOptions);
-            //ChromeDriver driver = new ChromeDriver();
+ */
+            ChromeDriver driver = new ChromeDriver();
 
 
             LogIn_Page logIn_page = PageFactory.initElements(driver, LogIn_Page.class);
@@ -58,7 +64,9 @@ public class HelpCardTablet_PKW {
             Screenshot screenshot = PageFactory.initElements(driver, Screenshot.class);
             WhoIsWho_Page whoIsWho = PageFactory.initElements(driver, WhoIsWho_Page.class);
 
-            driver.manage().window().maximize();
+           // driver.manage().window().maximize();
+            Dimension d = new Dimension(1024, 1366);
+            driver.manage().window().setSize(d);
 
 
             //Open Who_is_Who settings
@@ -104,7 +112,7 @@ public class HelpCardTablet_PKW {
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             home_page.clickOnLogoutButton();
             Thread.sleep(5000);
 
@@ -136,6 +144,7 @@ public class HelpCardTablet_PKW {
 
             fleet_page.clickOnDataProtectionBanner();
             fleet_page.clickOnCookieBanner();
+            serviceManagement_2_page.closeCookies();
             Thread.sleep(5000);
 
             fleet_page.clickOnInboxIcon();
@@ -149,57 +158,65 @@ public class HelpCardTablet_PKW {
             Thread.sleep(2000);
 
 
-            driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1301802");
+            driver.get("https://xentry-int2.daimler.com/order/service-reception/141420740");
             auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
 
             carCheck_page.clickOnCarCheckReiter();
             auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
 
-             helpCard_page.clickOnStartButton();
-             auftrag_management_page.waitForSpinnerNotAppears();
+            carCheck_page.clickOnStartButton();
+            auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsPKW();
 
             screenshot.madeScreenshot("7", sprache[i]);
 
-            helpCard_page.clickOnXButtonVonFrontscheibeForCar();
+            carCheck_page.clickOnXButtonVonFrontscheibeForCar();
             Thread.sleep(2000);
             helpCard_page.clickOnTextFrontscheibe();
             Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToFahrzeugAussenSeite();
             screenshot.madeScreenshot("8", sprache[i]);
 
-           helpCard_page.checkListDelete_1();
+            carCheck_page.checkListDelete();
             auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
             kundendialog_page.closeVorgang();
             auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
 
-            driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1381690");
+            driver.get("https://xentry-int2.daimler.com/order/service-reception/141402275");
             auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
 
             kundendialog_page.clickOnKundendialog();
             auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
+            kundendialog_page.titleReplace();
+            kundendialog_page.replaceVorgangDetailsPKW();
+            kundendialog_page.clickOnTextKundendialog();
+
             screenshot.madeScreenshot("9", sprache[i]);
 
             helpCard_page.scrollDownThePageToKundenEntscheidung();
+            kundendialog_page.replaceServiceVertragNummerAndAngebotnummer();
+            kundendialog_page.clickOnTextFahrzeugCheckErgebniss();
             Thread.sleep(2000);
             screenshot.madeScreenshot("10", sprache[i]);
-
-
 
             driver.quit();
         }

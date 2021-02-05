@@ -13,8 +13,13 @@ public class ScreenshotKundendialog_Truck {
     private static WebDriver driver = null;
 
     public static void main(String[] args) throws Exception {
-        String pathToChromefoxDriver = ".//ChromeDriver//chromedriver";
-        System.setProperty("webdriver.chrome.driver", pathToChromefoxDriver);
+        String pathToChromeforDriver = ".//ChromeDriver//chromedriver";
+        String pathToChrome_Windows = ".//Win_ChromeDriver//chromedriver.exe";
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            System.setProperty("webdriver.chrome.driver", pathToChrome_Windows);
+        } else{
+            System.setProperty("webdriver.chrome.driver", pathToChromeforDriver);
+        }
 
         String[] sprache = {UIConstants.PREF_LANGUAGE_DE,  UIConstants.PREF_LANGUAGE_DA, UIConstants.PREF_LANGUAGE_EN,
                 UIConstants.PREF_LANGUAGE_ES, UIConstants.PREF_LANGUAGE_FI, UIConstants.PREF_LANGUAGE_FR,
@@ -25,7 +30,7 @@ public class ScreenshotKundendialog_Truck {
                 UIConstants.PREF_LANGUAGE_EL, UIConstants.PREF_LANGUAGE_JA, UIConstants.PREF_LANGUAGE_KO,
                 UIConstants.PREF_LANGUAGE_RU, UIConstants.PREF_LANGUAGE_ZH, UIConstants.PREF_LANGUAGE_HU};
 
-        for(int i=16;i<17; i++) {
+        for(int i=1;i<2; i++) {
             ChromeDriver driver = new ChromeDriver();
             LogIn_Page logIn_page = PageFactory.initElements(driver, LogIn_Page.class);
             Home_Page home_page = PageFactory.initElements(driver, Home_Page.class);
@@ -84,6 +89,7 @@ public class ScreenshotKundendialog_Truck {
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
+            auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(5000);
             home_page.clickOnLogoutButton();
             Thread.sleep(5000);
@@ -100,6 +106,7 @@ public class ScreenshotKundendialog_Truck {
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
+            auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(5000);
 
 
@@ -109,206 +116,105 @@ public class ScreenshotKundendialog_Truck {
             Thread.sleep(5000);
 
 
-            home_page.clickOnOutletMunich();
+            home_page.clickOnOutletReutlingen();
             Thread.sleep(5000);
 
             home_page.clickOnChangeOutletButton();
+            auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(5000);
 
             fleet_page.clickOnDataProtectionBanner();
             fleet_page.clickOnCookieBanner();
             Thread.sleep(5000);
+            serviceManagement_2_page.closeCookies();
 
             fleet_page.clickOnInboxIcon();
             fleet_page.clickOnInboxIcon();
             Thread.sleep(2000);
-
+           //KundenD-2036
 
             if (sprache[i].equals("(de)")){
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1301055");
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/141402336");
             }
             else {
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1313827");
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/141402675");
             }
+            kundendialog_page.waitForLoadingScreen();
             kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             kundendialog_page.clickOnKundendialog();
+            kundendialog_page.waitForLoadingScreen();
             kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
+
+            kundendialog_page.titleReplace();
+            if (sprache[i].equals("(de)")){
+                kundendialog_page.replaceVorgangDetails();
+            }
+            else {
+                kundendialog_page.replaceVorgangDetails();
+            }
             kundendialog_page.clickOnTextKundendialog();
+
+            auftrag_management_page.zoomIn_1();
+            Thread.sleep(2000);
+
             screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_AUFTRAGMANAGEMENT, sprache[i]);
-            Thread.sleep(2000);
-            kundendialog_page.clickOnPlusButtonMitNeuenKundenanliegen();
-            Thread.sleep(2000);
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(1000);
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_NEU_KUNDENANLIEGEN, sprache[i]);
-            kundendialog_page.closeKundenanliegenDialog();
-            Thread.sleep(1000);
-            kundendialog_page.closeVorgang();
-            kundendialog_page.waitForSpinnerNotAppears();
-
-            /////////2037
-            /////////
-            if (sprache[i].equals("(de)")){
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1301059");
-            }
-            else {
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1313819");
-            }
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
-
-            kundendialog_page.clickOnKundendialog();
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
-
-            kundendialog_page.clickOnTextKundendialog();
-            Thread.sleep(2000);
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_AUFTRAGSPOSITION, sprache[i]);
-
-            kundendialog_page.clickOnKundendienstmassnahme();
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(1000);
-            auftrag_management_page.clickOnTextKundendienstmassnahme();
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_AUFTRAGSPOSITION_DETAILS, sprache[i]);
-            kundendialog_page.closeKundendienstmassnahmeDialog();
-            Thread.sleep(2000);
-
-            kundendialog_page.clickOnWartung();
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(1000);
-            kundendialog_page.clickOnTextWartung();
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_AUFTRAGSPOSITION_DETAILS_WARTUNG, sprache[i]);
-            kundendialog_page.closeWartungDialog();
-
-
-            kundendialog_page.clickOnBeanstandung();
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(1000);
-            kundendialog_page.clickOnTextBeanstandung();
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_AUFTRAGSPOSITION_DETAILS_BEANSTANDUNG, sprache[i]);
-            kundendialog_page.closeBeanstandungDialog();
-
-            kundendialog_page.closeVorgang();
-            kundendialog_page.waitForSpinnerNotAppears();
-
-            ///////////2036
-            //////////
-            if (sprache[i].equals("(de)")){
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1301056");
-            }
-            else {
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1313832");
-            }
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
-
-            kundendialog_page.clickOnKundendialog();
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.zoomRelease();
             Thread.sleep(2000);
 
             kundendialog_page.scrollDownThePageToAnnahme();
+            kundendialog_page.clickOnHeadOfKundendialog();
             Thread.sleep(2000);
-            kundendialog_page.clickOnTextDokumentieren();
             screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_RCT, sprache[i]);
-            kundendialog_page.scrollDownThePageToEmpfehlung();
-            Thread.sleep(2000);
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_TABELLE_UAT,sprache[i]);
-            kundendialog_page.clickOnAServiceVertrag();
-            Thread.sleep(2000);
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_UAT_SERVICEVERTRAG_DETAILS, sprache[i]);
-            kundendialog_page.closeServicevertragDialog();
-            Thread.sleep(2000);
             kundendialog_page.closeVorgang();
             kundendialog_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
 
-            /////////2034
+
+
+            /////////KundenD-2037
             /////////
             if (sprache[i].equals("(de)")){
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1301054");
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/141413185");
             }
             else {
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1313817");
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/141409647");
             }
+            kundendialog_page.waitForLoadingScreen();
             kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
 
             kundendialog_page.clickOnKundendialog();
+            kundendialog_page.waitForLoadingScreen();
             kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
-            kundendialog_page.clickOnStiftSymbolForKundenUnterschrift();
-            kundendialog_page.waitForSpinnerNotAppears();
-            Thread.sleep(10000);
-            kundendialog_page.clickOnFinishButton();
-            kundendialog_page.waitForSpinnerNotAppears();
-            Thread.sleep(5000);
-            kundendialog_page.waitForSpinnerNotAppears();
-            Thread.sleep(5000);
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(5000);
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_VERSAND_AUFTRAG, sprache[i]);
 
-            kundendialog_page.clickOnVerwerfenButton();
-            Thread.sleep(2000);
-            kundendialog_page.closeVorgang();
-            Thread.sleep(5000);
-
-
-
-
-            ////////////
-            ///////////
-            //OutLet ändern
-            home_page.clickOnFrameOfOutletName();
-            Thread.sleep(5000);
-
-
-            home_page.clickOnOutletReutlingen();
-            Thread.sleep(5000);
-
-            home_page.clickOnChangeOutletButton();
-            Thread.sleep(5000);
-
-
-
-
-
-
-
-            /////////2037
-            /////////
+            kundendialog_page.titleReplace();
             if (sprache[i].equals("(de)")){
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1313986");
+                kundendialog_page.replaceVorgangDetails();
             }
             else {
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1313989");
+                kundendialog_page.replaceVorgangDetails();
             }
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
-
-            kundendialog_page.clickOnKundendialog();
-            kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
             kundendialog_page.clickOnTextKundendialog();
-            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG__AUFTRAG_VERSAND, sprache[i]);
+            Thread.sleep(2000);
+            auftrag_management_page.zoomIn_1();
+            Thread.sleep(2000);
+
+
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_AUFTRAGSPOSITION, sprache[i]);
+
+            auftrag_management_page.zoomRelease();
+            Thread.sleep(2000);
 
             kundendialog_page.scrollDownThePageToAblehnungAuftragposition();
+            kundendialog_page.clickOnHeadOfKundendialog();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_ABLEHNUNG_AUFTRAGSPOSITION, sprache[i]);
-
 
             kundendialog_page.clickOnStiftSymbolForKundenUnterschrift();
             kundendialog_page.waitForSpinnerNotAppears();
@@ -325,46 +231,135 @@ public class ScreenshotKundendialog_Truck {
             kundendialog_page.waitForSpinnerNotAppears();
             Thread.sleep(5000);
             kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            Thread.sleep(5000);
+            auftrag_management_page.closeErrorAndHinweis_2();
+
+
+            if (sprache[i].equals("(de)")){
+                kundendialog_page.replaceOnVersandDialog();
+            }
+            else {
+                kundendialog_page.replaceOnVersandDialog();
+            }
+
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_VERSAND_AUFTRAG, sprache[i]);
+
             kundendialog_page.clickOnVerwerfenButton();
             Thread.sleep(2000);
 
             kundendialog_page.closeVorgang();
+            kundendialog_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
+
+
+            ///////////2039
+            //////////
+            if (sprache[i].equals("(de)")){
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/141414404");
+            }
+            else {
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/141414444");
+            }
+            kundendialog_page.waitForLoadingScreen();
+            kundendialog_page.waitForSpinnerNotAppears();
+            auftrag_management_page.closeErrorAndHinweis_2();
+            Thread.sleep(2000);
+
+            kundendialog_page.clickOnKundendialog();
+            kundendialog_page.waitForLoadingScreen();
+            kundendialog_page.waitForSpinnerNotAppears();
+            auftrag_management_page.closeErrorAndHinweis_2();
+            Thread.sleep(2000);
+
+            kundendialog_page.titleReplace();
+            if (sprache[i].equals("(de)")){
+                kundendialog_page.replaceVorgangDetails();
+            }
+            else {
+                kundendialog_page.replaceVorgangDetails();
+            }
+
+            kundendialog_page.clickOnTextKundendialog();
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG__AUFTRAG_VERSAND, sprache[i]);
+
+            kundendialog_page.scrollDownThePageToAnnahme();
+            kundendialog_page.clickOnHeadOfKundendialog();
+            Thread.sleep(2000);
+            kundendialog_page.clickOnKundenOffenPunktHinweis();
             Thread.sleep(5000);
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_RCT_OFFEN_PRUFPUNKT, sprache[i]);
+            kundendialog_page.closeKundenOffenPunktHinweis();
+            Thread.sleep(2000);
 
 
-
-
-            ////////////
-            ///////////
-            //OutLet ändern
-            home_page.clickOnFrameOfOutletName();
+            kundendialog_page.clickOnKundenDelegatePunktHinweis();
             Thread.sleep(5000);
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_RCT_DELEGATE_PRUFPUNKT, sprache[i]);
+            kundendialog_page.closeKundenDelegatePunktHinweis();
+            Thread.sleep(2000);
 
-
-            home_page.clickOnOutletHannover();
+            kundendialog_page.clickOnZustandFahrzeugaussenseite();
             Thread.sleep(5000);
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_RCT_BILD_PRUFPUNKT, sprache[i]);
+            kundendialog_page.closeZustandFahrzeugaussenseite();
+            Thread.sleep(2000);
 
-            home_page.clickOnChangeOutletButton();
+
+
+            kundendialog_page.clickOnWarnUndFunktionsleuchten();
             Thread.sleep(5000);
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_RCT_OK_NOK, sprache[i]);
+            kundendialog_page.closeWarnUndFunktionsleuchten();
+            Thread.sleep(2000);
+
+            kundendialog_page.clickOnNaviKartenstand();
+            Thread.sleep(5000);
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_RCT_NAVI_KARTE, sprache[i]);
+            kundendialog_page.closeNaviKartenstand();
+            Thread.sleep(2000);
+
+            kundendialog_page.clickOnZustandUndProfil();
+            Thread.sleep(5000);
+            screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_RCT_RAEDER_REIFEN, sprache[i]);
+            kundendialog_page.closeZustandUndProfil();
+            Thread.sleep(2000);
+
+            kundendialog_page.closeVorgang();
+            kundendialog_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
+
 
             /////////UAT-2038
             /////////
             if (sprache[i].equals("(de)")){
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1372234");
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/1372234");
             }
             else {
-                driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1372229");
+                driver.get("https://xentry-int2.daimler.com/order/service-reception/1372229");
             }
+            kundendialog_page.waitForLoadingScreen();
             kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
 
             kundendialog_page.clickOnKundendialog();
+            kundendialog_page.waitForLoadingScreen();
             kundendialog_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
+
+            kundendialog_page.titleReplace();
+            if (sprache[i].equals("(de)")){
+                kundendialog_page.replaceVorgangDetails();
+            }
+            else {
+                kundendialog_page.replaceVorgangDetails();
+            }
+            kundendialog_page.clickOnTextKundendialog();
+
+
             kundendialog_page.scrollDownThePageToEmpfehlung();
+            kundendialog_page.clickOnHeadOfKundendialog();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.TC_KUNDEN_DIALOG_UAT, sprache[i]);
 

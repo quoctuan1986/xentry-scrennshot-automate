@@ -13,8 +13,13 @@ public class OfferScreenshotPKW {
     private static WebDriver driver = null;
 
     public static void main(String[] args) throws Exception {
-        String pathToChromefoxDriver = ".//ChromeDriver//chromedriver";
-        System.setProperty("webdriver.chrome.driver", pathToChromefoxDriver);
+        String pathToChromeforDriver = ".//ChromeDriver//chromedriver";
+        String pathToChrome_Windows = ".//Win_ChromeDriver//chromedriver.exe";
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            System.setProperty("webdriver.chrome.driver", pathToChrome_Windows);
+        } else{
+            System.setProperty("webdriver.chrome.driver", pathToChromeforDriver);
+        }
 
         String[] sprache = {UIConstants.PREF_LANGUAGE_DE,  UIConstants.PREF_LANGUAGE_DA, UIConstants.PREF_LANGUAGE_EN,
                 UIConstants.PREF_LANGUAGE_ES, UIConstants.PREF_LANGUAGE_FI, UIConstants.PREF_LANGUAGE_FR,
@@ -25,7 +30,7 @@ public class OfferScreenshotPKW {
                 UIConstants.PREF_LANGUAGE_RO, UIConstants.PREF_LANGUAGE_RU, UIConstants.PREF_LANGUAGE_SK,
                 UIConstants.PREF_LANGUAGE_TR, UIConstants.PREF_LANGUAGE_ZH,UIConstants.PREF_LANGUAGE_HU};
 
-        for(int i=0;i<sprache.length; i++) {
+        for(int i=0;i<1; i++) {
             ChromeDriver driver = new ChromeDriver();
             LogIn_Page logIn_page = PageFactory.initElements(driver, LogIn_Page.class);
             Home_Page home_page = PageFactory.initElements(driver, Home_Page.class);
@@ -53,93 +58,77 @@ public class OfferScreenshotPKW {
 
             logIn_page.enterUserName(UIConstants.USER_NAME);
             logIn_page.clickOnNextButton();
-            Thread.sleep(5000);
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(5000);
 
             whoIsWho.clickOnUserModify();
-            Thread.sleep(5000);
 
             whoIsWho.clickOnPrefLanguageBox();
             Thread.sleep(5000);
 
             whoIsWho.selectTheLanguage(sprache[i]);
-            Thread.sleep(5000);
 
             whoIsWho.clickOnSaveButton();
-            Thread.sleep(2000);
 
             whoIsWho.clickOnLogoutButton();
             Thread.sleep(2000);
 
 
             driver.get(UIConstants.URL_XENTRY);
-            Thread.sleep(5000);
-
 
             logIn_page.clickOnsignInButton();
-            Thread.sleep(5000);
 
             logIn_page.enterUserName(UIConstants.USER_NAME);
             logIn_page.clickOnNextButton();
-            Thread.sleep(5000);
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(5000);
+
             home_page.clickOnLogoutButton();
             Thread.sleep(5000);
 
             driver.get(UIConstants.URL_XENTRY);
-            Thread.sleep(5000);
 
             logIn_page.clickOnsignInButton();
-            Thread.sleep(5000);
 
             logIn_page.enterUserName(UIConstants.USER_NAME);
             logIn_page.clickOnNextButton();
-            Thread.sleep(5000);
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(5000);
 
 
 //Change Oulet name
             home_page.clickOnFrameOfOutletName();
-            Thread.sleep(5000);
 
             home_page.clickOnOutletAugsburg();
-            Thread.sleep(5000);
 
             home_page.clickOnChangeOutletButton();
-            Thread.sleep(5000);
 
-            fleet_page.clickOnDataProtectionBanner();
-            fleet_page.clickOnCookieBanner();
-            Thread.sleep(5000);
+          //  fleet_page.clickOnDataProtectionBanner();
+          //  fleet_page.clickOnCookieBanner();
+            fleet_page.closeCookies();
 
             fleet_page.clickOnInboxIcon();
             fleet_page.clickOnInboxIcon();
-            Thread.sleep(2000);
             auftrag_management_page.alleKachelAnzeige();
             Thread.sleep(2000);
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.gutenTag();
 
             screenshot.madeScreenshot(UIConstants.XP_START_PAGE, sprache[i]);
-            Thread.sleep(2000);
 
 
             home_page.clickOnCockPit();
             serviceManagement_2_page.waitForSpinnerNotAppears();
-            Thread.sleep(2000);
             fleet_page.clickOnVehicleList();
             serviceManagement_2_page.waitForSpinnerNotAppears();
 
             fleet_page.clickOnInboxIcon();
             fleet_page.clickOnInboxIcon();
-            Thread.sleep(2000);
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceTheVehicleList();
 
 
             screenshot.madeScreenshot(UIConstants.PKW_COCKPIT_FAHRZEUG_LIST, sprache[i]);
@@ -147,174 +136,185 @@ public class OfferScreenshotPKW {
 
             //Smart obboarding
             fleet_page.clickOnIButton();
-            Thread.sleep(5000);
+            Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PkW_SMART_ONBOARDING, sprache[i]);
             fleet_page.closeSmartOnboardingDialog();
 
             fleet_page.clickOnFilterButton();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PKW_FILTERMENÜ, sprache[i]);
-            Thread.sleep(2000);
+
+            serviceManagement_2_page.clickOnRefreshButtonOnTheVehicleList();
+            serviceManagement_2_page.waitForSpinnerNotAppears();
 
             fleet_page.clickOnTheFin(UIConstants.TEST_FIN_OFFER_SENT);
-            Thread.sleep(5000);
-            screenshot.madeScreenshot(UIConstants.PKW_COCKPIT_BUENDELUNG, sprache[i]);
             Thread.sleep(2000);
+            serviceManagement_2_page.replaceTheVehicleList();
+            serviceManagement_2_page.replaceServiceNameOnLeadDetails();
+            screenshot.madeScreenshot(UIConstants.PKW_COCKPIT_BUENDELUNG, sprache[i]);
 
             fleet_page.clickOnLupeForLeadDetail();
             Thread.sleep(10000);
             screenshot.madeScreenshot(UIConstants.PKW_COCKPIT_ANFRAGE_DETAILS, sprache[i]);
             fleet_page.closeDialogLeadDetails();
-            Thread.sleep(2000);
 
 
             fleet_page.clickOnMoreInfoButton();
             Thread.sleep(2000);
 
             screenshot.madeScreenshot(UIConstants.PKW_ZUSATZINFORMATION, sprache[i]);
-            Thread.sleep(2000);
 
             fleet_page.clickOnCustomerInfo();
-            Thread.sleep(5000);
-
+            Thread.sleep(2000);
+            serviceManagement_2_page.replaceKundenInfoInVehicle();
             screenshot.madeScreenshot(UIConstants.PKW_COCKPIT_KUNDENINFO, sprache[i]);
             fleet_page.closeDialogOfCustomerInfo();
-            Thread.sleep(2000);
 
             fleet_page.clickOnMoreInfoButton();
-            Thread.sleep(2000);
             fleet_page.clickOnTeleData();
-            Thread.sleep(15000);
-
-            serviceManagement_2_page.scrollDownThePageToWartungsdaten();
-            serviceManagement_2_page.zoomIn();
+            serviceManagement_2_page.waitForSpinnerNotAppears();
+            serviceManagement_2_page.waitForTelematikToDisplayedInCockpit();
             Thread.sleep(2000);
+            serviceManagement_2_page.replaceTextOnTele();
 
             screenshot.madeScreenshot(UIConstants.PKW_COCKPIT_TD_GRUNDDATEN, sprache[i]);
 
-            serviceManagement_2_page.zommRelease();
-            Thread.sleep(2000);
-
             fleet_page.closeDialogOfTeleData();
-            Thread.sleep(3000);
 
 
             fleet_page.clickOnMoreInfoButton();
-            Thread.sleep(2000);
             fleet_page.clickOnVehicleData();
-            Thread.sleep(5000);
-
+            Thread.sleep(2000);
+            serviceManagement_2_page.replaceFinOnVehicleDetail();
             screenshot.madeScreenshot(UIConstants.PKW_COCKPIT_FAHRZEUGDETAILS, sprache[i]);
             fleet_page.closeDialogOfVehicleData();
-            Thread.sleep(3000);
 
+
+            serviceManagement_2_page.clickOnRefreshButtonOnTheVehicleList();
+            serviceManagement_2_page.waitForSpinnerNotAppears();
             //////////////////////////
             fleet_page.clickOnTheFin(UIConstants.TEST_FIN);
-            Thread.sleep(5000);
             fleet_page.clickOnOfferButton();
             serviceManagement_2_page.waitForSpinnerNotAppears();
-            serviceManagement_2_page.closeErrorAndHinweis();
+            serviceManagement_2_page.closeErrorAndHinweis_1();
             serviceManagement_2_page.clickOnTextAnfrage();
             Thread.sleep(1000);
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceFinOnOfferDetail(UIConstants.TEST_FIN);
+
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_MAßNAMHEN_SELEKTIEREN, sprache[i]);
 
             serviceManagement_2_page.clickOnSideNavigation();
-            Thread.sleep(2000);
             serviceManagement_2_page.closeTheOffer();
             serviceManagement_2_page.waitForSpinnerNotAppears();
 
             //////////
-            fleet_page.clickOnTheFin(UIConstants.TEST_FIN_NOTIFICATION);
-            Thread.sleep(5000);
+            fleet_page.clickOnTheFin("WDD2130421A466830");
             fleet_page.clickOnOfferButton();
             serviceManagement_2_page.waitForSpinnerNotAppears();
             serviceManagement_2_page.closeErrorAndHinweis();
             Thread.sleep(1000);
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceFinOnOfferDetail("WDD2130421A466830");
+
             serviceManagement_2_page.clickOnTelematikData();
-            Thread.sleep(10000);
-            serviceManagement_2_page.clickOnNotificationDetailsInTelematikData();
+            Thread.sleep(20000);
+           // serviceManagement_2_page.clickOnNotificationDetailsInTelematikData();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PkW_NOTIFICATION,sprache[i]);
             serviceManagement_2_page.closeTelematikData();
-            Thread.sleep(2000);
-
 
             serviceManagement_2_page.clickOnSideNavigation();
-            Thread.sleep(2000);
             serviceManagement_2_page.closeTheOffer();
             serviceManagement_2_page.waitForSpinnerNotAppears();
 
 
 
             fleet_page.clickOnTheFin(UIConstants.TEST_FIN_OFFER_SENT);
-            Thread.sleep(5000);
             fleet_page.clickOnOfferButton();
             serviceManagement_2_page.waitForSpinnerNotAppears();
             serviceManagement_2_page.closeHinweis();
             Thread.sleep(1000);
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceFinOnOfferDetail(UIConstants.TEST_FIN_OFFER_SENT);
+
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_WIEDEREROEFFNUNG, sprache[i]);
 
             serviceManagement_2_page.clickOnSideNavigation();
-            Thread.sleep(2000);
             serviceManagement_2_page.closeTheOffer();
-            Thread.sleep(20000);
+            serviceManagement_2_page.waitForSpinnerNotAppears();
+
 
             fleet_page.clickOnTheFin(UIConstants.TEST_FIN_OFFER_CREATED);
-            Thread.sleep(5000);
             fleet_page.clickOnOfferButton();
             serviceManagement_2_page.waitForSpinnerNotAppears();
-            serviceManagement_2_page.closeErrorAndHinweis();
+            serviceManagement_2_page.closeErrorAndHinweis_1();
             Thread.sleep(1000);
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceFinOnOfferDetail(UIConstants.TEST_FIN_OFFER_CREATED);
+
             serviceManagement_2_page.clickOnCustomerData();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
+            serviceManagement_2_page.replaceKundendatenInOffer();
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_KUNDENINFO, sprache[i]);
             serviceManagement_2_page.closeOfferCustomerInfo();
 
 
             serviceManagement_2_page.clickOnVerhicleData();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
+            serviceManagement_2_page.replaceFahrzeugdatenInOffer();
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_FAHRZEUGDATEN, sprache[i]);
-            Thread.sleep(2000);
             serviceManagement_2_page.clickOnTabVehicleHistoryOfVehicleData();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PkW_FAHRZEUGDATEN_LEBENSLAUF, sprache[i]);
-            Thread.sleep(2000);
             serviceManagement_2_page.clickOnTabOverviewOfVehicleData();
             Thread.sleep(2000);
-            serviceManagement_2_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
+            serviceManagement_2_page.closeErrorAndHinweis_1();
             serviceManagement_2_page.clickOnServiceContractNumber();
-            Thread.sleep(10000);
+            Thread.sleep(5000);
+            serviceManagement_2_page.closeErrorAndHinweis_1();
+            serviceManagement_2_page.replaceOnVetragdetail();
             screenshot.madeScreenshot(UIConstants.PKW_SERVICE_VERTRAGSDETAILS, sprache[i]);
             serviceManagement_2_page.closeOfferVehicleInfo();
-            Thread.sleep(2000);
 
             serviceManagement_2_page.clickOnTelematikData();
-            Thread.sleep(10000);
-            screenshot.madeScreenshot(UIConstants.PKW_OFFER_TELEMATIK, sprache[i]);
             Thread.sleep(2000);
-
+            serviceManagement_2_page.replaceOnTelematikdataOnOffer();
+            screenshot.madeScreenshot(UIConstants.PKW_OFFER_TELEMATIK, sprache[i]);
 
             serviceManagement_2_page.clickOnXentryAppointment();
-            Thread.sleep(10000);
+            serviceManagement_2_page.waitForSpinnerNotAppearsOnAppointment();
             serviceManagement_2_page.clickOnPlusButtonForNewAppointment();
-            Thread.sleep(10000);
+            serviceManagement_2_page.waitForSpinnerNotAppearsOnAppointment();
+            Thread.sleep(20000);
             screenshot.madeScreenshot(UIConstants.PKW_XAA_TERMINVEREINBARUNG, sprache[i]);
             serviceManagement_2_page.closeXentryAppointment();
-            Thread.sleep(10000);
 
             serviceManagement_2_page.clickOnCommunication();
-            Thread.sleep(30000);
+            serviceManagement_2_page.waitForSpinnerNotAppears();
+            serviceManagement_2_page.closeFeatureGuideOnCommunication();
+            Thread.sleep(1000);
+            serviceManagement_2_page.closeEmailDialogOnComminication();
+            Thread.sleep(1000);
+            serviceManagement_2_page.replaceEmailListOnCommunication();
+            Thread.sleep(1000);
+            serviceManagement_2_page.neueEmailErfassen();
+            Thread.sleep(1000);
+
+
+
+            serviceManagement_2_page.replaceOnCommunication();
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_KOMMUNIKATION, sprache[i]);
             serviceManagement_2_page.closeCommunication();
-            Thread.sleep(20000);
 
             serviceManagement_2_page.clickOnThreePointMenu();
-            Thread.sleep(2000);
             serviceManagement_2_page.clickOnSettingInOffer();
-            Thread.sleep(10000);
-            serviceManagement_2_page.closeError();
-            Thread.sleep(2000);
+//            serviceManagement_2_page.closeError();
+            Thread.sleep(1000);
             serviceManagement_2_page.clickOnSettingBenutzereinstellungen();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PkW_SETTING_BENUTZER_EINSTELLUNGEN, sprache[i]);
@@ -332,39 +332,38 @@ public class OfferScreenshotPKW {
 
 
             serviceManagement_2_page.clickOnSideNavigation();
-            Thread.sleep(2000);
             serviceManagement_2_page.closeTheOffer();
             serviceManagement_2_page.waitForSpinnerNotAppears();
 
             fleet_page.clickOnTheFin(UIConstants.TEST_FIN_OFFER_IN_PROGRESS);
-            Thread.sleep(5000);
             fleet_page.clickOnOfferButton();
 
             serviceManagement_2_page.waitForSpinnerNotAppears();
-            serviceManagement_2_page.closeErrorAndHinweis();
+            serviceManagement_2_page.closeErrorAndHinweis_1();
             Thread.sleep(1000);
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceFinOnOfferDetail(UIConstants.TEST_FIN_OFFER_IN_PROGRESS);
 
             serviceManagement_2_page.clickOnAMaintenance();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_MASSNAHMENDETAILS, sprache[i]);
-            Thread.sleep(2000);
 
             serviceManagement_2_page.clickOnTheTabPackage();
-            Thread.sleep(2000);
+            Thread.sleep(1000);
 
             serviceManagement_2_page.addPackage();
-            Thread.sleep(20000);
+            serviceManagement_2_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
             serviceManagement_2_page.closeErrorPackage();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_PACKAGE_ADD, sprache[i]);
             serviceManagement_2_page.closeAddPackageDialog();
-            Thread.sleep(2000);
 
             serviceManagement_2_page.addManualOperation();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_MANUELLE, sprache[i]);
             serviceManagement_2_page.closeAddManualOperationDialog();
-            Thread.sleep(2000);
 
             serviceManagement_2_page.packageUnfold();
             Thread.sleep(2000);
@@ -376,8 +375,8 @@ public class OfferScreenshotPKW {
 
 
 
-            serviceManagement_2_page.clickOnEditButtonForPackage();
-            Thread.sleep(2000);
+//            serviceManagement_2_page.clickOnEditButtonForPackage();
+//            Thread.sleep(2000);
             serviceManagement_2_page.clickOnTextMaintanceManagement();
             Thread.sleep(1000);
             screenshot.madeScreenshot(UIConstants.PKW_PAKETE_BEARBEITEN, sprache[i]);
@@ -385,85 +384,113 @@ public class OfferScreenshotPKW {
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PkW_OFFER_PAKETE_PREIS_AUSWAHL, sprache[i]);
             serviceManagement_2_page.closeChangePriceDialog();
-            Thread.sleep(2000);
             serviceManagement_2_page.closeEditPackageDialog();
-            Thread.sleep(2000);
 
             serviceManagement_2_page.clickOnSummary();
-            Thread.sleep(10000);
+            serviceManagement_2_page.clickOnVerwerfenButton();
+            serviceManagement_2_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
+
+            serviceManagement_2_page.replaceFinOnOfferDetailOfSummaryForEditing(UIConstants.TEST_FIN_OFFER_IN_PROGRESS);
+            serviceManagement_2_page.replaceSummaryPage();
+
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_SUMMARY, sprache[i]);
             serviceManagement_2_page.clickOnStornoButton();
             Thread.sleep(5000);
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_STORNO, sprache[i]);
             serviceManagement_2_page.closeStornoDialog();
-            Thread.sleep(2000);
 
             serviceManagement_2_page.clickOnSideNavigation();
-            Thread.sleep(2000);
             serviceManagement_2_page.closeTheOffer();
-            Thread.sleep(2000);
 //            serviceManagement_2_page.clickOnDiscardDialog();
             serviceManagement_2_page.waitForSpinnerNotAppears();
 
             fleet_page.clickOnTheFin(UIConstants.TEST_FIN_OFFER_SENT_2);
-            Thread.sleep(5000);
             fleet_page.clickOnOfferButton();
 
             serviceManagement_2_page.waitForSpinnerNotAppears();
-            serviceManagement_2_page.closeErrorAndHinweis();
-            Thread.sleep(1000);
+            serviceManagement_2_page.closeErrorAndHinweis_1();
 
             serviceManagement_2_page.clickOnSummary();
-            Thread.sleep(10000);
+            serviceManagement_2_page.waitForSpinnerNotAppears();
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceFinOnOfferDetailOfSummaryForSent(UIConstants.TEST_FIN_OFFER_SENT_2);
+            serviceManagement_2_page.replaceKundengespaechPage();
+
+
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_KUNDENGESPRAECH, sprache[i]);
 
             serviceManagement_2_page.clickOnScheduleAppointmentButton();
-            Thread.sleep(10000);
+            serviceManagement_2_page.waitForSpinnerNotAppearsOnAppointment();
+            Thread.sleep(20000);
+
+
             screenshot.madeScreenshot(UIConstants.PkW_OFFER_TERMINLISTE, sprache[i]);
+
+            serviceManagement_2_page.clickOnATerminOnTheList();
+            serviceManagement_2_page.waitForSpinnerNotAppearsOnAppointment();
+            Thread.sleep(20000);
+            screenshot.madeScreenshot(UIConstants.PkW__OFFER_TERMIN_HINZUFUEGEN, sprache[i]);
+            serviceManagement_2_page.closeTerminVereinbarenDialog();
+
+
+
             serviceManagement_2_page.clickOnPlusButtonForNewAppointment();
-            Thread.sleep(10000);
+            serviceManagement_2_page.waitForSpinnerNotAppearsOnAppointment();
             serviceManagement_2_page.enterDeliveryDate();
-            Thread.sleep(2000);
             serviceManagement_2_page.enterPickUpDate();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_KUNDENGESPRAECH_ANGENOMMEN, sprache[i]);
             serviceManagement_2_page.closeXentryAppointment();
-            Thread.sleep(2000);
 
             serviceManagement_2_page.clickOnRejectButton();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.PKW_OFFER_KUNDENGESPRAECH_ABLEHNEN,sprache[i]);
             serviceManagement_2_page.closeAblehnungDialog();
 
-            Thread.sleep(2000);
 
             serviceManagement_2_page.clickOnSideNavigation();
-            Thread.sleep(2000);
             serviceManagement_2_page.closeTheOffer();
             serviceManagement_2_page.waitForSpinnerNotAppears();
 
 
             fleet_page.clickOnTheFin(UIConstants.TEST_FIN_TERMIN_VEREINBAREN);
-            Thread.sleep(5000);
             fleet_page.clickOnOfferButton();
 
             serviceManagement_2_page.waitForSpinnerNotAppears();
-            serviceManagement_2_page.closeErrorAndHinweis();
-            Thread.sleep(1000);
+            serviceManagement_2_page.closeErrorAndHinweis_1();
 
             serviceManagement_2_page.clickOnSummary();
-            Thread.sleep(5000);
+            serviceManagement_2_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceFinOnOfferDetailOfSummaryForSent(UIConstants.TEST_FIN_TERMIN_VEREINBAREN);
+            serviceManagement_2_page.replaceKundengespaechPage();
+
+
             screenshot.madeScreenshot(UIConstants.PkW_OFFER_TERMIN_VEREINBAREN, sprache[i]);
             Thread.sleep(1000);
 
             driver.get("https://xentry-int2.daimler.com/offer/archive/?sort=modificationDate,desc&page=0");
             serviceManagement_2_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceArchivList();
+
 
             screenshot.madeScreenshot(UIConstants.PkW_ANGEBOT_ARCHIV, sprache[i]);
 
             serviceManagement_2_page.clickOnArchivDetail();
-            Thread.sleep(5000);
             serviceManagement_2_page.waitForSpinnerNotAppears();
+            Thread.sleep(2000);
+
+
+            serviceManagement_2_page.titleReplace();
+            serviceManagement_2_page.replaceOnArchivDetail();
+
             screenshot.madeScreenshot(UIConstants.PkW_ANGEBOT_ARCHIV_DETAILS, sprache[i]);
             driver.quit();
         }

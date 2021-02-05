@@ -13,15 +13,20 @@ public class OfferScreenshotTruck {
     private static WebDriver driver = null;
 
     public static void main(String[] args) throws Exception {
-        String pathToChromefoxDriver = ".//ChromeDriver//chromedriver";
-        System.setProperty("webdriver.chrome.driver", pathToChromefoxDriver);
+        String pathToChromeforDriver = ".//ChromeDriver//chromedriver";
+        String pathToChrome_Windows = ".//Win_ChromeDriver//chromedriver.exe";
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            System.setProperty("webdriver.chrome.driver", pathToChrome_Windows);
+        } else{
+            System.setProperty("webdriver.chrome.driver", pathToChromeforDriver);
+        }
 
         String[] sprache = {UIConstants.PREF_LANGUAGE_BG, UIConstants.PREF_LANGUAGE_DE, UIConstants.PREF_LANGUAGE_CS, UIConstants.PREF_LANGUAGE_DA, UIConstants.PREF_LANGUAGE_EL,
                 UIConstants.PREF_LANGUAGE_EN, UIConstants.PREF_LANGUAGE_ES, UIConstants.PREF_LANGUAGE_FI, UIConstants.PREF_LANGUAGE_FR, UIConstants.PREF_LANGUAGE_HU, UIConstants.PREF_LANGUAGE_IT,
                 UIConstants.PREF_LANGUAGE_JA, UIConstants.PREF_LANGUAGE_KO, UIConstants.PREF_LANGUAGE_NL, UIConstants.PREF_LANGUAGE_NO, UIConstants.PREF_LANGUAGE_PL, UIConstants.PREF_LANGUAGE_PT,
                 UIConstants.PREF_LANGUAGE_RO, UIConstants.PREF_LANGUAGE_RU, UIConstants.PREF_LANGUAGE_SK, UIConstants.PREF_LANGUAGE_SL, UIConstants.PREF_LANGUAGE_SV, UIConstants.PREF_LANGUAGE_TR};
 
-        for(int i=22;i<sprache.length; i++) {
+        for(int i=0;i<sprache.length; i++) {
             ChromeDriver driver = new ChromeDriver();
             LogIn_Page logIn_page = PageFactory.initElements(driver, LogIn_Page.class);
             Home_Page home_page = PageFactory.initElements(driver, Home_Page.class);

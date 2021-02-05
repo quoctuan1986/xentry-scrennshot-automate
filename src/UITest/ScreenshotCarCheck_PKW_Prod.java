@@ -1,20 +1,17 @@
 package UITest;
 
-import org.openqa.selenium.*;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import pageObjects.*;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 
-public class ScreenshotCarCheck_VAN {
+public class ScreenshotCarCheck_PKW_Prod {
     private static WebDriver driver = null;
+
 
     public static void main(String[] args) throws Exception {
         String pathToChromeforDriver = ".//ChromeDriver//chromedriver";
@@ -34,7 +31,7 @@ public class ScreenshotCarCheck_VAN {
                             UIConstants.PREF_LANGUAGE_RO, UIConstants.PREF_LANGUAGE_RU, UIConstants.PREF_LANGUAGE_SK,
                             UIConstants.PREF_LANGUAGE_TR, UIConstants.PREF_LANGUAGE_ZH,UIConstants.PREF_LANGUAGE_HU};
 
-        for(int i=3;i<sprache.length; i++) {
+        for(int i=7;i<24; i++) {
             ChromeDriver driver = new ChromeDriver();
 
 
@@ -52,20 +49,21 @@ public class ScreenshotCarCheck_VAN {
 
 
             //Open Who_is_Who settings
-            driver.get(UIConstants.URL_WHO_IS_WHO);
+            driver.get(UIConstants.URL_WHO_IS_WHO_PROD);
             driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
             Dimension d = new Dimension(1920, 1080);
+
             driver.manage().window().setSize(d);
 
             Thread.sleep(5000);
 
 
-            logIn_page.enterUserName(UIConstants.USER_NAME);
+            logIn_page.enterUserName(UIConstants.USER_NAME_TOBI);
             logIn_page.clickOnNextButton();
             Thread.sleep(5000);
 
-            logIn_page.enterPassWord(UIConstants.PASWORD);
+            logIn_page.enterPassWord(UIConstants.PASWORD_TOBI);
             logIn_page.clickOnSubmitButton();
             Thread.sleep(5000);
 
@@ -85,35 +83,39 @@ public class ScreenshotCarCheck_VAN {
             Thread.sleep(2000);
 
 
-            driver.get(UIConstants.URL_XENTRY);
+            driver.get(UIConstants.URL_XENTRY_PROD);
             Thread.sleep(5000);
 
             logIn_page.clickOnsignInButton();
             Thread.sleep(5000);
 
-            logIn_page.enterUserName(UIConstants.USER_NAME);
+            logIn_page.enterUserName(UIConstants.USER_NAME_TOBI);
             logIn_page.clickOnNextButton();
             Thread.sleep(5000);
 
-            logIn_page.enterPassWord(UIConstants.PASWORD);
+            logIn_page.enterPassWord(UIConstants.PASWORD_TOBI);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(5000);
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.waitForLoadingScreen();
+            Thread.sleep(2000);
             home_page.clickOnLogoutButton();
             Thread.sleep(5000);
 
-            driver.get(UIConstants.URL_XENTRY);
+            driver.get(UIConstants.URL_XENTRY_PROD);
             Thread.sleep(5000);
 
             logIn_page.clickOnsignInButton();
             Thread.sleep(5000);
 
-            logIn_page.enterUserName(UIConstants.USER_NAME);
+            logIn_page.enterUserName(UIConstants.USER_NAME_TOBI);
             logIn_page.clickOnNextButton();
             Thread.sleep(5000);
 
-            logIn_page.enterPassWord(UIConstants.PASWORD);
+            logIn_page.enterPassWord(UIConstants.PASWORD_TOBI);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(5000);
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.waitForLoadingScreen();
+            Thread.sleep(2000);
 
 
 
@@ -121,7 +123,7 @@ public class ScreenshotCarCheck_VAN {
             home_page.clickOnFrameOfOutletName();
             Thread.sleep(5000);
 
-            home_page.clickOnOutletAugsburg();
+            home_page.clickOnOutletBoeblingen();
             Thread.sleep(5000);
 
             home_page.clickOnChangeOutletButton();
@@ -129,60 +131,139 @@ public class ScreenshotCarCheck_VAN {
 
             fleet_page.clickOnDataProtectionBanner();
             fleet_page.clickOnCookieBanner();
+            serviceManagement_2_page.closeCookies();
             Thread.sleep(5000);
 
             fleet_page.clickOnInboxIcon();
             fleet_page.clickOnInboxIcon();
             Thread.sleep(2000);
 
-          //  auftrag_management_page.clickOnXentryOrder();
-           // auftrag_management_page.waitForSpinnerNotAppears();
-           // auftrag_management_page.closeErrorAndHinweis();
-          //  Thread.sleep(2000);
-           // carCheck_page.vorgangAnlegen(UIConstants.CC_VORGANG_FIN_VAN, UIConstants.CC_VORGANG_KENNZEICHEN);
-           // Thread.sleep(2000);
 
 
-            driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1382508");
-            auftrag_management_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
-            carCheck_page.clickOnCarCheckReiter();
+            driver.get("https://xentry.daimler.com/order/service-reception/95011116");
             carCheck_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
-            Thread.sleep(2000);
-            carCheck_page.clickOnStartButton();
-            carCheck_page.waitForSpinnerNotAppears();
-            /////////////
-
-            carCheck_page.reifenBeurteilen();
-            Thread.sleep(2000);
-            carCheck_page.scrollDownThePageToReifenForCar();
-            Thread.sleep(2000);
-            screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_REIFEN_ZUSTAND, sprache[i]);
-            carCheck_page.reifenBeurteilenDelete();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
             Thread.sleep(2000);
             ///////
 
+            carCheck_page.clickOnTextAuftragsmanagement();
+            ///////
+            carCheck_page.titleReplace();
+            auftrag_management_page.replaceVorgangDetailsPKW();
+            auftrag_management_page.clickOnTextAuftragmanagement();
+
+            Thread.sleep(2000);
+            carCheck_page.clickOnCarCheckReiter();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
+            Thread.sleep(2000);
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsPKW();
+
+
+            carCheck_page.clickOnStartButton();
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
+
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToFrontscheibeForCar();
+            Thread.sleep(2000);
+            carCheck_page.clickOnXButtonVonFrontscheibeForCar();
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToFrontscheibeForCar();
+            Thread.sleep(2000);
+            carCheck_page.clickOnHakeVonWischerForCar();
+            Thread.sleep(2000);
+            carCheck_page.clickOnMotorraumDelegate();
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToFrontscheibeForCar();
+            Thread.sleep(2000);
+            screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_KM_IO_NIO_UEBERSICHT, sprache[i]);
+            carCheck_page.scrollDownThePageToFahrzeuginnenraumForCar();
+            Thread.sleep(2000);
+
+
+
+
+            /////
+            carCheck_page.scrollDownThePageToKartedatenstandForCar();
+
+            carCheck_page.clickXSymbolVonKartenStandForCar();
+            Thread.sleep(1000);
+            carCheck_page.scrollDownThePageToKartedatenstandForCar();
+            Thread.sleep(1000);
+
+
+            ////
+            carCheck_page.scrollDownThePageToKartedatenstandForCar();
+
+            carCheck_page.clickOnHakenVonServiceAnzeige();
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToKartedatenstandForCar();
+            Thread.sleep(1000);
+            carCheck_page.clickOnHakenVonZusatzArbeitStaufilter();
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToKundenSpezifisch();
+            Thread.sleep(2000);
+            screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_ZUSATZARBEIT, sprache[i]);
+
+            carCheck_page.checkListDelete();
+            carCheck_page.waitForSpinnerNotAppears();
+            kundendialog_page.closeVorgang();
+            carCheck_page.waitForSpinnerNotAppears();
+
+
+
+            driver.get("https://xentry.daimler.com/order/service-reception/95009024");
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
+            Thread.sleep(2000);
+            carCheck_page.clickOnCarCheckReiter();
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.waitForLoadingScreen();
+            carCheck_page.closeErrorAndHinweis();
+            Thread.sleep(2000);
+            carCheck_page.clickOnStartButton();
+            carCheck_page.waitForSpinnerNotAppears();
+            carCheck_page.closeErrorAndHinweis();
+
+            ///////
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsPKW();
+
             carCheck_page.scrollDownThePageToReifenCheckForCar();
             Thread.sleep(2000);
-            carCheck_page.zoomIn();
+            carCheck_page.zoomInWithFaktor("0.8");
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_PROFIL_REIFENDRUCK, sprache[i]);
             carCheck_page.zoomRelease();
             Thread.sleep(2000);
 
+
+            carCheck_page.scrollDownThePageToReifenGanzRechtsCar();
+            Thread.sleep(2000);
+            carCheck_page.zoomInWithFaktor("0.8");
+            Thread.sleep(2000);
+            screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_PROFIL_REIFENDRUCK_2, sprache[i]);
+            carCheck_page.zoomRelease();
+
+
             carCheck_page.clickOnStiftSymbolForRaderForCar();
             Thread.sleep(2000);
-            carCheck_page.zoomIn();
-            Thread.sleep(2000);
+
             screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_ACHSEN_AUSWAHL, sprache[i]);
-            carCheck_page.zoomRelease();
-            Thread.sleep(2000);
             carCheck_page.closeDialogForRader();
             Thread.sleep(2000);
 
             carCheck_page.scrollDownThePageToReifenCheck();
+
+
+            Thread.sleep(1000);
 
 
             carCheck_page.enterProfilTiefe("4");
@@ -190,15 +271,13 @@ public class ScreenshotCarCheck_VAN {
             carCheck_page.enterReifenDruckForCar("3");
             Thread.sleep(2000);
 
+            carCheck_page.scrollDownThePageToReifenGanzRechtsCar();
 
             carCheck_page.clickOnCrosshairForProfilTiefeForCar();
             Thread.sleep(2000);
             carCheck_page.positionierenAnReifenLinkVorneForCar();
             Thread.sleep(2000);
-          //  carCheck_page.zoomIn();
-            Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_BEFUND_POSITION, sprache[i]);
-          //  carCheck_page.zoomRelease();
             Thread.sleep(2000);
             carCheck_page.clickOnReifenLinkVorneForCar();
             Thread.sleep(2000);
@@ -208,15 +287,24 @@ public class ScreenshotCarCheck_VAN {
             Thread.sleep(2000);
 
 
-            carCheck_page.scrollDownThePageToReifenCheck();
-            Thread.sleep(2000);
-         //   carCheck_page.zoomIn_4();
+            carCheck_page.scrollDownThePageToReifenGanzRechtsCar();
             Thread.sleep(2000);
             screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_REIFENDRUCK_ERFASSEN, sprache[i]);
-         //   carCheck_page.zoomRelease();
             Thread.sleep(2000);
-            carCheck_page.checkListDelete();
 
+            /////////////
+
+            carCheck_page.scrollDownThePageToReifenLinksUnterForCar();
+            Thread.sleep(2000);
+            carCheck_page.reifenBeurteilen();
+            Thread.sleep(2000);
+            carCheck_page.scrollDownThePageToReifenLinksUnterForCar();
+            Thread.sleep(2000);
+            screenshot.madeScreenshot(UIConstants.CC_VORGANG_FAHRZEUG_CHECK_REIFEN_ZUSTAND, sprache[i]);
+//            carCheck_page.reifenBeurteilenDelete();
+            Thread.sleep(2000);
+
+            carCheck_page.checkListDelete();
             driver.quit();
         }
     }

@@ -1,5 +1,6 @@
 package UITest;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,8 +17,13 @@ public class HelpCardTablet_Truck {
 
 
     public static void main(String[] args) throws Exception {
-        String pathToChromefoxDriver = ".//ChromeDriver//chromedriver";
-        System.setProperty("webdriver.chrome.driver", pathToChromefoxDriver);
+        String pathToChromeforDriver = ".//ChromeDriver//chromedriver";
+        String pathToChrome_Windows = ".//Win_ChromeDriver//chromedriver.exe";
+        if (System.getProperty("os.name").startsWith("Windows")) {
+            System.setProperty("webdriver.chrome.driver", pathToChrome_Windows);
+        } else{
+            System.setProperty("webdriver.chrome.driver", pathToChromeforDriver);
+        }
 
         String[] sprache = {UIConstants.PREF_LANGUAGE_DE,  UIConstants.PREF_LANGUAGE_DA, UIConstants.PREF_LANGUAGE_EN,
                             UIConstants.PREF_LANGUAGE_ES, UIConstants.PREF_LANGUAGE_FI, UIConstants.PREF_LANGUAGE_FR,
@@ -28,8 +34,8 @@ public class HelpCardTablet_Truck {
                             UIConstants.PREF_LANGUAGE_RO, UIConstants.PREF_LANGUAGE_RU, UIConstants.PREF_LANGUAGE_SK,
                             UIConstants.PREF_LANGUAGE_TR, UIConstants.PREF_LANGUAGE_ZH,UIConstants.PREF_LANGUAGE_HU};
 
-        for(int i=23;i<sprache.length; i++) {
-
+        for(int i=0;i<sprache.length; i++) {
+/*
             Map<String, String> mobileEmulation = new HashMap<>();
 
             mobileEmulation.put("deviceName", "iPad Pro");
@@ -39,7 +45,9 @@ public class HelpCardTablet_Truck {
             chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
 
             driver = new ChromeDriver(chromeOptions);
-            //ChromeDriver driver = new ChromeDriver();
+
+            */
+            ChromeDriver driver = new ChromeDriver();
 
 
             LogIn_Page logIn_page = PageFactory.initElements(driver, LogIn_Page.class);
@@ -55,7 +63,9 @@ public class HelpCardTablet_Truck {
             Screenshot screenshot = PageFactory.initElements(driver, Screenshot.class);
             WhoIsWho_Page whoIsWho = PageFactory.initElements(driver, WhoIsWho_Page.class);
 
-            driver.manage().window().maximize();
+          //  driver.manage().window().maximize();
+            Dimension d = new Dimension(1024, 1366);
+            driver.manage().window().setSize(d);
 
 
             //Open Who_is_Who settings
@@ -101,7 +111,7 @@ public class HelpCardTablet_Truck {
 
             logIn_page.enterPassWord(UIConstants.PASWORD);
             logIn_page.clickOnSubmitButton();
-            Thread.sleep(10000);
+            Thread.sleep(5000);
             home_page.clickOnLogoutButton();
             Thread.sleep(5000);
 
@@ -133,6 +143,7 @@ public class HelpCardTablet_Truck {
 
             fleet_page.clickOnDataProtectionBanner();
             fleet_page.clickOnCookieBanner();
+            serviceManagement_2_page.closeCookies();
             Thread.sleep(5000);
 
             fleet_page.clickOnInboxIcon();
@@ -140,26 +151,118 @@ public class HelpCardTablet_Truck {
             Thread.sleep(2000);
 
 
-            driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1382901");
+            driver.get("https://xentry-int2.daimler.com/order/service-reception/1382901");
             auftrag_management_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
 
             carCheck_page.clickOnCarCheckReiter();
             auftrag_management_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
+
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsTruck();
+
+            screenshot.madeScreenshot("01", sprache[i]);
 
           //  helpCard_page.clickOnStartButton();
-            helpCard_page.clickOnStartButton();
+            carCheck_page.clickOnStartButton();
             auftrag_management_page.waitForSpinnerNotAppears();
-            auftrag_management_page.closeErrorAndHinweis();
+            auftrag_management_page.closeErrorAndHinweis_2();
             Thread.sleep(2000);
-            screenshot.madeScreenshot("7", sprache[i]);
 
-            helpCard_page.clickOnXButtonForZustandUnterfahrschutz();
+
+            carCheck_page.titleReplace();
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
+            screenshot.madeScreenshot("02", sprache[i]);
+
+
+
+            carCheck_page.hakenRausnehmenVonKurztest();
             Thread.sleep(2000);
-            screenshot.madeScreenshot("8", sprache[i]);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
+            carCheck_page.scrollDownThePageToFahrzeuginnenraum();
+            Thread.sleep(1000);
+            carCheck_page.clickOnStiftSymbolForWartungdaten();
+            Thread.sleep(2000);
+            carCheck_page.closeErrorAndHinweis();
+            Thread.sleep(1000);
+            carCheck_page.wartungKanalWahl_2();
+            Thread.sleep(2000);
+            carCheck_page.clickOnTextWartung();
+
+            screenshot.madeScreenshot("03", sprache[i]);
+
+            carCheck_page.closeWartungKanal();
+            Thread.sleep(2000);
+
+            carCheck_page.scrollDownThePageToFahrzeuginnenraum();
+            Thread.sleep(2000);
+            helpCard_page.kurztestZuweisen();
+            Thread.sleep(2000);
+            screenshot.madeScreenshot("04", sprache[i]);
+            helpCard_page.closeKurzTestReiter();
+
+            carCheck_page.scrollDownThePageToFahrzeuginnenraum();
+            Thread.sleep(2000);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
+            carCheck_page.clickOnStiftSymbolForWartungdaten();
+            Thread.sleep(2000);
+            carCheck_page.closeErrorAndHinweis();
+            Thread.sleep(1000);
+            carCheck_page.wartungKanalWahl();
+            Thread.sleep(2000);
+
+
+            screenshot.madeScreenshot("06", sprache[i]);
+
+            carCheck_page.scrollDownThePageInWartung();
+            Thread.sleep(2000);
+
+
+
+
+            screenshot.madeScreenshot("05", sprache[i]);
+            carCheck_page.closeWartungKanal();
+            Thread.sleep(2000);
+
+
+
+            carCheck_page.scrollDownThePageToFrontscheibe();
+            Thread.sleep(1000);
+            carCheck_page.clickOnXButtonVonFrontscheibe();
+            Thread.sleep(1000);
+            carCheck_page.scrollDownThePageToFrontscheibe();
+            Thread.sleep(1000);
+            carCheck_page.clickOnHakeVonWischer();
+            Thread.sleep(1000);
+            carCheck_page.scrollDownThePageToFrontscheibe();
+            Thread.sleep(1000);
+            carCheck_page.clickOnDelegateOfSignalhorn();
+            carCheck_page.scrollDownThePageToFrontscheibe();
+            Thread.sleep(1000);
+
+            carCheck_page.replaceVorgangDetailsTruck();
+
+
+            screenshot.madeScreenshot("07", sprache[i]);
+
+            carCheck_page.clickOnKreisOnKartenstand();
+            Thread.sleep(1000);
+            carCheck_page.scrollDownThePageToFrontscheibe();
+            Thread.sleep(1000);
+
+            screenshot.madeScreenshot("08", sprache[i]);
 
             carCheck_page.checkListDelete();
             auftrag_management_page.waitForSpinnerNotAppears();
@@ -167,7 +270,7 @@ public class HelpCardTablet_Truck {
             kundendialog_page.closeVorgang();
             auftrag_management_page.waitForSpinnerNotAppears();
 
-            driver.get("https://xentry-int2.daimler.com/car-check/service-reception/1381686");
+            driver.get("https://xentry-int2.daimler.com/order/service-reception/141415310");
             auftrag_management_page.waitForSpinnerNotAppears();
             Thread.sleep(2000);
             auftrag_management_page.closeErrorAndHinweis();
@@ -178,7 +281,13 @@ public class HelpCardTablet_Truck {
             Thread.sleep(2000);
             auftrag_management_page.closeErrorAndHinweis();
             Thread.sleep(2000);
-            screenshot.madeScreenshot("9", sprache[i]);
+
+            kundendialog_page.titleReplace();
+            kundendialog_page.replaceVorgangDetails();
+            kundendialog_page.clickOnTextKundendialog();
+
+
+            screenshot.madeScreenshot("09", sprache[i]);
 
             kundendialog_page.scrollDownThePageToAblehnungAuftragposition();
             Thread.sleep(2000);
