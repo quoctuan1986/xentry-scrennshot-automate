@@ -1,26 +1,60 @@
 package pageObjects;
 
-import org.junit.rules.Timeout;
-import org.omg.CORBA.TIMEOUT;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
+
 
 public class Fleet_Page {
     private static WebDriver driver;
 
     public Fleet_Page(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public static void timeDelay(long t) {
+        try {
+            Thread.sleep(t);
+        } catch (InterruptedException e) {}
+    }
+
+    public static WebElement elementWithXpath(String xpath){
+        int timeToSleep = 0;
+        Boolean elementIsExist = driver.findElements(By.xpath(xpath)).isEmpty();
+        Boolean elementIsEnable = driver.findElement(By.xpath(xpath)).isEnabled();
+        Boolean elementIsDisplayed = driver.findElement(By.xpath(xpath)).isDisplayed();
+        while((elementIsExist || !elementIsDisplayed || !elementIsEnable)  && timeToSleep < 60000){
+            timeToSleep = timeToSleep+1000;
+            timeDelay(1000);
+            System.out.print("Warte auf Element"+"\n");
+            elementIsExist = driver.findElements(By.xpath(xpath)).isEmpty();
+            elementIsEnable = driver.findElement(By.xpath(xpath)).isEnabled();
+            elementIsDisplayed = driver.findElement(By.xpath(xpath)).isDisplayed();
+        }
+        return driver.findElement(By.xpath(xpath));
+    }
+
+
+    public static WebElement elementWithID(String id){
+        int timeToSleep = 0;
+        Boolean elementIsExist = driver.findElements(By.id(id)).isEmpty();
+        Boolean elementIsEnable = driver.findElement(By.id(id)).isEnabled();
+        Boolean elementIsDisplayed = driver.findElement(By.id(id)).isDisplayed();
+        while((elementIsExist || !elementIsDisplayed || !elementIsEnable)   && timeToSleep < 60000){
+            timeToSleep = timeToSleep+1000;
+            timeDelay(1000);
+            System.out.print("Warte auf Element"+"\n");
+            elementIsExist = driver.findElements(By.id(id)).isEmpty();
+            elementIsEnable = driver.findElement(By.id(id)).isEnabled();
+            elementIsDisplayed = driver.findElement(By.id(id)).isDisplayed();
+        }
+        return driver.findElement(By.id(id));
     }
 
     public static void clickOnElement(WebElement element) {
@@ -35,27 +69,28 @@ public class Fleet_Page {
         }
     }
 
-    public static WebElement elementWithXpath(String xpath){
-        WebElement ele = driver.findElement(By.xpath(xpath));
-        return ele;
-    }
 
-    public static WebElement elementWithId(String id){
-        WebElement ele = driver.findElement(By.id(id));
-        return ele;
-    }
 
-    public static WebElement vehicleList() {
-        WebElement vehicle = driver.findElement(By.id("ui-tabpanel-1-label"));
+
+
+    public static WebElement vehicleList() throws InterruptedException {
+        int i=0;
+        while (driver.findElements(By.xpath("/html/body/cp-app/p-tabview/div/ul/li[2]/a/span")).isEmpty()){
+            Thread.sleep(500);
+            i=i+500;
+            if (i>10000){
+                driver.navigate().refresh();
+            }
+        }
+        WebElement vehicle = driver.findElement(By.xpath("/html/body/cp-app/p-tabview/div/ul/li[2]/a/span"));
         return vehicle;
     }
 
     public static WebElement fleetList() {
-        WebElement fleet = driver.findElement(By.id("ui-tabpanel-0-label"));
-        return fleet;
+        return elementWithXpath("/html/body/cp-app/p-tabview/div/ul/li[1]/a/span");
     }
 
-    public static void clickOnVehicleList() {
+    public static void clickOnVehicleList() throws InterruptedException {
         vehicleList().click();
     }
 
@@ -64,8 +99,7 @@ public class Fleet_Page {
     }
 
     public static WebElement filterButton() {
-        WebElement filter = driver.findElement(By.xpath("//*[contains(@class, 'rc-i-filter')]"));
-        return filter;
+        return elementWithXpath("//*[contains(@class, 'rc-i-filter')]");
     }
 
     public static void clickOnFilterButton() {
@@ -137,8 +171,7 @@ public class Fleet_Page {
     }
 
     public static void showAllVehicle() {
-        WebElement element = driver.findElement(By.id("showVehiclesBtn"));
-        element.click();
+        elementWithID("showVehiclesBtn").click();
     }
 
     public static WebElement spinner() {
@@ -172,11 +205,10 @@ public class Fleet_Page {
     }
 
     public static WebElement OfferButton() {
-        WebElement element = driver.findElement(By.id("offerBtn"));
-        return element;
+        return elementWithID("offerBtn");
     }
 
-    public static void clickOnOfferButton() {
+    public static void clickOnOfferButton(){
         OfferButton().click();
     }
 
@@ -198,123 +230,106 @@ public class Fleet_Page {
         }
     }
 
+    public static void closeCookies(){
+        WebElement element = driver.findElement(By.xpath("//*[contains(@class, 'xf-hint-content xf-icon xf-hint-close-icon xf-line-icons')]"));
+        element.click();
+    }
+
     public static void clickOnMoreInfoButton() {
         WebElement element = driver.findElement(By.className("addition"));
         element.click();
     }
 
     public static void clickOnCustomerInfo() {
-        WebElement element = driver.findElement(By.id("0"));
-        element.click();
+        elementWithID("0").click();
     }
 
     public static void clickOnCustomerInfoForTruck() {
-        WebElement element = driver.findElement(By.id("0"));
-        element.click();
+        elementWithID("0").click();
     }
 
     public static void closeDialogOfCustomerInfoForTruck() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-contact-details/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-contact-details/p-dialog/div/div[1]/a/span").click();
     }
 
     public static void clickOnFahrzeugmeldungenForTruck() {
-        WebElement element = driver.findElement(By.id("1"));
-        element.click();
+        elementWithID("1").click();
     }
 
     public static void closeDialogFahrzeugmeldungen() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-vehicle-notifications/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-vehicle-notifications/p-dialog/div/div[1]/a/span").click();
     }
 
     public static void clickOnTeleDataForTruck() {
-        WebElement element = driver.findElement(By.id("2"));
-        element.click();
+        elementWithID("2").click();
     }
 
     public static void closeDialogOfTeleDataForTruck() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-telematics-data/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-telematics-data/p-dialog/div/div[1]/a/span").click();
     }
 
 
     public static void clickOnVehicleDataForTruck() {
-        WebElement element = driver.findElement(By.id("3"));
-        element.click();
+        elementWithID("3").click();
     }
 
     public static void closeDialogOfVehicleDataForTruck() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-vehicle-data/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-vehicle-data/p-dialog/div/div[1]/a/span").click();
     }
 
     public static void clickOnTeleData() {
-        WebElement element = driver.findElement(By.id("1"));
-        element.click();
+        elementWithID("1").click();
     }
 
     public static void clickOnTeleData_Pro() {
-        WebElement element = driver.findElement(By.id("2"));
-        element.click();
+        elementWithID("2").click();
     }
 
 
     public static void clickOnVehicleData() {
-        WebElement element = driver.findElement(By.id("2"));
-        element.click();
+        elementWithID("2").click();
     }
 
     public static void closeDialogOfCustomerInfo() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-contact-details/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-contact-details/p-dialog/div/div[1]/a/span").click();
     }
 
     public static void closeDialogOfTeleData() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-telematics-data/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-telematics-data/p-dialog/div/div[1]/a/span").click();
     }
 
     public static void closeDialogOfVehicleData() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-vehicle-data/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-vehicle-data/p-dialog/div/div[1]/a/span").click();
     }
 
     public static void clickOnNavbarAppdrawer() {
-        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/a[2]"));
-        element.click();
+        elementWithXpath("/html/body/div[1]/div[1]/div[2]/a[2]").click();
     }
 
     public static void clickOnArchivMenu() {
-        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/nav[1]/div/div[2]/a[1]/div"));
-        element.click();
+        elementWithXpath("/html/body/div[1]/div[1]/div[2]/nav[1]/div/div[2]/a[1]/div").click();
     }
 
     public static void changeToArchivOfferTab() {
-        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/header/div[2]/div[2]/nav/ul/div/li[2]/a/div"));
-        element.click();
+        elementWithXpath("/html/body/div[1]/header/div[2]/div[2]/nav/ul/div/li[2]/a/div").click();
     }
 
     public static void clickOnInboxIcon() {
-        WebElement element = driver.findElement(By.xpath("//*[contains(@class, 'xf-icon xf-inbox-icon xf-line-icons')]"));
-        element.click();
+        elementWithXpath("//*[contains(@class, 'xf-icon xf-inbox-icon xf-line-icons')]").click();
     }
 
 
     public static void clickOnLupeForLeadDetail() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-outletvehiclelist/div/div[2]/cp-vehiclelist-context/div[2]/div[1]/div[2]/p-datatable/div/div[1]/table/tbody/tr[1]/td[5]/span/button/span[1]"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-outletvehiclelist/div/div[2]/cp-vehiclelist-context/div[2]/div[1]/div[2]/p-datatable/div/div[1]/table/tbody/tr[1]/td[5]/span/button/span[1]").click();
     }
 
     public static void clickOnLupeForLeadDetailOfTruck() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-vehiclelist/div/div[2]/cp-vehiclelist-context/div[2]/div[1]/div[2]/p-datatable/div/div[1]/table/tbody/tr[1]/td[5]/span/button/span[1]"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-vehiclelist/div/div[2]/cp-vehiclelist-context/div[2]/div[1]/div[2]/p-datatable/div/div[1]/table/tbody/tr[1]/td[5]/span/button/span[1]").click();
     }
 
 
     public static void closeDialogLeadDetails() {
-        WebElement element = driver.findElement(By.xpath("/html/body/cp-app/cp-lead-details/p-dialog/div/div[1]/a/span"));
-        element.click();
+        elementWithXpath("/html/body/cp-app/cp-lead-details/p-dialog/div/div[1]/a/span").click();
     }
 
     public static void clickOnIButton(){
@@ -323,7 +338,7 @@ public class Fleet_Page {
     }
 
     public static void closeSmartOnboardingDialog(){
-        elementWithXpath("/html/body/div[10]/div[1]/button").click();
+        elementWithXpath("/html/body/div[11]/div[1]/button").click();
     }
 
 }

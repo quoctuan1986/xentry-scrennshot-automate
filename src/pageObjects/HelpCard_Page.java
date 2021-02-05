@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import java.util.List;
+
 public class HelpCard_Page {
     public static WebDriver driver;
 
@@ -153,10 +155,31 @@ public class HelpCard_Page {
     }
 
     public static void scrollDownThePageToKundenEntscheidung(){
-        WebElement element = driver.findElement(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-customer-dialog-overview/div/div/div/div/ma-reception-check-table/div/div[1]"));
+        WebElement element = driver.findElement(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-customer-dialog-overview/div/div/div/div[1]/div/ma-reception-check-table/div/div[1]/h3"));
         moveTheCosorToElement(element);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
+
+    public static void scrollDownThePageToKundenEntscheidungTabelle(){
+        WebElement element = driver.findElement(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-customer-dialog-overview/div/div/div/div[1]/div/ma-reception-check-table/div/div[2]/p-table/div/div/table/tbody/tr[2]/td[1]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToEmpfehlung(){
+        WebElement element = driver.findElement(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-customer-dialog-overview/div/div/div/div[1]/div/ma-upselling-advisory-table/div/div[1]/h3"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+
+
+
+
+
+
+
+
 
 
     public static void clickOnStiftSymbolForRader(){
@@ -511,12 +534,12 @@ public class HelpCard_Page {
     }
 
     public static void clickOnTextFrontscheibe(){
-        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-cc-check-overview/div/div/div/div/ma-cc-checklist-with-checkpoints/div/div[1]/ma-cc-complaint-checkpoint[1]/ma-cc-checkpoint/div/header/div[1]/h2").click();
+        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-cc-check-overview/div/div/div/div[1]/div/div[1]/div[1]/ma-cc-complaint-checkpoint[1]/ma-cc-checkpoint/div/header/div[1]/h2").click();
 
     }
 
     public static void clickOnTechnikBeanstandung(){
-        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-service-reception-overview/div/div/div/div/ma-app-order-position-table/div/div[2]/p-table/div/div/table/tbody/tr/td[1]").click();
+        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-service-reception-overview/div/div/div/div[1]/div/ma-app-order-position-table/div/div[2]/p-table/div/div/table/tbody/tr/td[1]").click();
     }
 
     public static void clickOnTechnikBeanstandungForTruck(){
@@ -524,6 +547,73 @@ public class HelpCard_Page {
     }
 
     public static void clickOnTextAuftragsManagement(){
-        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-service-reception-overview/div/div/div/div/header/div/h2").click();
+        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-service-reception-overview/div/div/div/div[1]/header/div/h2").click();
+    }
+
+    public static void textReplace(WebElement element, String text){
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].innerHTML= '"+text+"';",element);
+    }
+
+
+    public static WebElement element(String xpath){
+        WebElement ele = driver.findElement(By.xpath(xpath));
+        return ele;
+    }
+
+    public static int countOfVorgangInTheList() {
+        List<WebElement> elements = driver.findElements(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card"));
+        return elements.size();
+    }
+
+    public static void replaceVorgangListPKW(){
+        for (int i=1; i<= 17; i++){
+            if (!driver.findElements(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[3]/span/span[3]/span")).isEmpty()){
+                textReplace(element("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[3]/span/span[3]/span"), UIConstants.SERVICE_BERATER);
+
+            }
+            if (!driver.findElements(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[1]/span")).isEmpty()){
+                textReplace(element("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[1]/span"), UIConstants.KUNDEN_NAME);
+
+            }
+            if (!driver.findElements(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[2]/span")).isEmpty()){
+                textReplace(element("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[2]/span"), UIConstants.KENNZEICHEN_TEXTREPLACE);
+            }
+
+
+        }
+    }
+
+    public static void replaceVorgangListTruck(){
+        for (int i=1; i<= 20; i++){
+            if (!driver.findElements(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[3]/span/span[3]/span")).isEmpty()){
+                textReplace(element("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[3]/span/span[3]/span"), UIConstants.SERVICE_BERATER);
+
+            }
+            if (!driver.findElements(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[1]/span")).isEmpty()){
+                textReplace(element("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[1]/span"), UIConstants.KUNDEN_NAME);
+
+            }
+            if (!driver.findElements(By.xpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[2]/span")).isEmpty()){
+                textReplace(element("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-reception-list/div/div/div[2]/xy-c-card["+i+"]/button/span/span/span[1]/span/span[2]/span"), UIConstants.KENNZEICHEN_TEXTREPLACE);
+            }
+
+
+        }
+    }
+
+    public static void kurztestZuweisen() throws InterruptedException{
+        //Click on Kurztest reiter
+        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-cc-check-overview/div/div/ma-app-context-navigation/div/ul/li[3]/button/span").click();
+        Thread.sleep(2000);
+        //selektiere ein Kurztest
+        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-cc-check-overview/div/div/div/div[3]/xy-c-dialog/div/ma-quick-test/xy-c-spinner/div/div/div[2]/div[2]/p-table/div/div/table/tbody/tr[1]/td[1]/p-tablecheckbox/div/div[2]").click();
+        Thread.sleep(2000);
+
+    }
+
+    public static void closeKurzTestReiter(){
+        //Close Kurztest reiter
+        elementWithXpath("/html/body/ma-cc-car-check-app/div/xy-c-frame/div/div/div[1]/div[1]/div/div/div/ma-cc-check-overview/div/div/ma-app-context-navigation/div/ul/li[3]/button/span").click();
     }
 }

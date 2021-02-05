@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import javax.xml.ws.WebEndpoint;
 import java.util.List;
 
 public class WhoIsWho_Page {
@@ -14,9 +13,39 @@ public class WhoIsWho_Page {
         this.driver = driver;
     }
 
+    public static void timeDelay(long t) {
+        try {
+            Thread.sleep(t);
+        } catch (InterruptedException e) {}
+    }
+
+    public static WebElement elementWithXpath(String xpath){
+        int timeToSleep = 0;
+        Boolean elementIsExist = driver.findElements(By.xpath(xpath)).isEmpty();
+        while(elementIsExist  && timeToSleep < 60000){
+            timeToSleep = timeToSleep+1000;
+            timeDelay(1000);
+            System.out.print("Warte auf Element"+"\n");
+            elementIsExist = driver.findElements(By.xpath(xpath)).isEmpty();
+        }
+        return driver.findElement(By.xpath(xpath));
+    }
+
+
+    public static WebElement elementWithID(String id){
+        int timeToSleep = 0;
+        Boolean elementIsExist = driver.findElements(By.id(id)).isEmpty();
+        while(elementIsExist  && timeToSleep < 60000){
+            timeToSleep = timeToSleep+1000;
+            timeDelay(1000);
+            System.out.print("Warte auf Element"+"\n");
+            elementIsExist = driver.findElements(By.id(id)).isEmpty();
+        }
+        return driver.findElement(By.id(id));
+    }
+
     public static WebElement userModify(){
-        WebElement element = driver.findElement(By.id("slni_ID_SECOND_user-modify"));
-        return element;
+        return elementWithID("slni_ID_SECOND_user-modify");
     }
 
     public static void clickOnUserModify(){
@@ -24,8 +53,7 @@ public class WhoIsWho_Page {
     }
 
     public static WebElement preflanguageBox(){
-        WebElement element = driver.findElement(By.id("prefLang_sel"));
-        return element;
+        return elementWithID("prefLang_sel");
     }
 
     public static void clickOnPrefLanguageBox(){
@@ -52,8 +80,7 @@ public class WhoIsWho_Page {
     }
 
     public static  WebElement saveButton(){
-        WebElement element = driver.findElement(By.id("saveModBtn"));
-        return element;
+        return elementWithID("saveModBtn");
     }
 
     public static void clickOnSaveButton(){
@@ -61,8 +88,7 @@ public class WhoIsWho_Page {
     }
 
     public static WebElement logoutButton(){
-        WebElement element = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[1]/a"));
-        return element;
+        return elementWithXpath("/html/body/div[1]/div[1]/div[1]/a");
     }
 
     public static void clickOnLogoutButton(){

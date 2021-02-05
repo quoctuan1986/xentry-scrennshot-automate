@@ -427,7 +427,10 @@ public class Workshop_Page {
         driver.switchTo().defaultContent();
     }
 
-    public static void moveTheCosorToElement(WebElement element){
+    public static void
+
+
+    moveTheCosorToElement(WebElement element){
         Actions builder = new Actions(driver);
         builder.moveToElement(element).build().perform();
     }
@@ -466,6 +469,12 @@ public class Workshop_Page {
         boolean countOfSpin = true;
         while (countOfSpin ==true){
             countOfSpin = driver.findElements(By.xpath("*//div[contains(@class, 'spinner')]")).size() != 0;
+            System.out.print("Warten"+"\n");
+            Thread.sleep(1000);
+        }
+        boolean countOfBlock= true;
+        while (countOfBlock ==true){
+            countOfBlock = driver.findElements(By.xpath("*//div[contains(@class, 'iw-block-ui-content')]")).size() != 0;
             System.out.print("Warten"+"\n");
             Thread.sleep(1000);
         }
@@ -773,6 +782,630 @@ public class Workshop_Page {
         WebElement element = driver.findElement(By.xpath("//*[contains(@class, 'xf-hint-content xf-icon xf-hint-close-icon xf-line-icons')]"));
         element.click();
     }
+
+    public static void alleKachelAnzeige(){
+        element("/html/body/app-root/div/div/div[1]/div/app-tiles/div[2]/p-panel/div/div[1]/span").click();
+    }
+
+    public static void clickOnDrawIcon(){
+        WebElement element = driver.findElement(By.xpath("//*[contains(@class, 'xf-appdrawer-icon')]"));
+        element.click();
+    }
+
+    public static void clickOnControlPanelIcon(){
+        WebElement element = driver.findElement(By.xpath("//*[contains(@class, 'xf-controlpanel-icon')]"));
+        element.click();
+    }
+
+    public static void clickOnOutletRahmen(){
+        WebElement element = driver.findElement(By.xpath("//*[@id='xf-frame-outlet-name']"));
+        element.click();
+    }
+
+    public static void clickOnCancelButtonOutletRahmen(){
+        element("/html/body/div[1]/div[3]/div/div[3]/button[1]").click();
+    }
+
+    public static void clickOnSupportIcon(){
+        WebElement element = driver.findElement(By.xpath("//*[contains(@class, 'xf-controlpanel-support-icon')]"));
+        element.click();
+    }
+
+    public static void clickOnPlusButtonOnSupportDialog() throws InterruptedException{
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("xf-support-iframe");
+        element("/html/body/app-root/app-ticket-list/div/div/div[2]/button/i").click();
+        Thread.sleep(2000);
+        element("/html/body/app-root/app-ticket-list/div/div/div[2]/app-topic-selection/button[2]/span").click();
+        driver.switchTo().defaultContent();
+    }
+
+    public static void closeSupportDialog(){
+        element("/html/body/div[1]/div[4]/div/div[1]/span[2]").click();
+    }
+
+    public static void openTheXentryWorkshop(){
+        element("/html/body/app-root/div/div/div[1]/div/app-tiles/div[2]/div[1]/app-tile[4]/a/div/div[1]").click();
+    }
+
+    public static void clickOnTheSucheReiter(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[1]/a/span").click();
+    }
+
+    public static void clickOnJobauswahlReiter(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[2]/a/span").click();
+    }
+
+    public static void alleServiceBeraterAuswaehlen() throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[4]/p-dropdown/div/div[2]/span").click();
+        Thread.sleep(2000);
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[4]/p-dropdown/div/div[3]/div[2]/ul/p-dropdownitem[1]/li/span").click();
+    }
+
+    public static void alleTechnikerAuswaehlen() throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[5]/p-dropdown/div/div[2]/span").click();
+        Thread.sleep(2000);
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[5]/p-dropdown/div/div[3]/div[2]/ul/p-dropdownitem[2]/li/span").click();
+    }
+
+    public static void alleTechnikerAuswaehlenAlsUser() throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[5]/p-dropdown/div/div[2]/span").click();
+        Thread.sleep(2000);
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[5]/p-dropdown/div/div[3]/div[2]/ul/p-dropdownitem[1]/li/span").click();
+    }
+
+    public static void clickOnBlaueAugen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[2]/p-table/div/div/table/tbody/tr[1]/td[10]/div/button").click();
+    }
+
+    public static void closePopupVorganguebersicht(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/job-readonly-dialog/p-dialog/div/div[3]/p-footer/div[2]/div/button/span").click();
+    }
+
+    public static void clickOnBriefumschlag(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[5]/a/span[1]").click();
+    }
+
+    public static int countOfJobsInTheList() {
+        List<WebElement> elements = driver.findElements(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[2]/p-table/div/div/table/tbody/tr"));
+        System.out.print("Count of Jobs is: " + elements.size()+"\n");
+        return elements.size();
+    }
+
+    public static void clickOnTheJob(String fin) {
+        for (int i = 1; i <= countOfJobsInTheList(); i++) {
+            WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[2]/p-table/div/div/table/tbody/tr["+i+"]/td[3]/div/div"));
+            System.out.print("Text is :" + element.getText() + "\n");
+            if (element.getText().equals(fin)) {
+                element.click();
+                break;
+            }
+        }
+    }
+
+    public static void filternach(String fin) throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[6]/input").clear();
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[6]/input").click();
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[6]/input").sendKeys(fin);
+        Thread.sleep(2000);
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[1]/table/tr[2]/td[7]/button").click();
+    }
+
+    public static void closePopupByOpenJob(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/jobenrichmentdialog/div/p-dialog/div/div[3]/p-footer/div/button/span").click();
+    }
+
+    public static void clickOnModellText(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/iw-header-common/div[1]/div[2]/div[1]/div/div[2]").click();
+    }
+
+    public static void closeTheJob(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[4]/span").click();
+    }
+
+    public static void suchennach(String fin){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/value-search/p-panel/div/div[2]/div/div[1]/input").sendKeys(fin);
+    }
+
+    public static void clickOnCancelButtonBySearchOfJob(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/value-search/p-dialog[2]/div/div[3]/p-footer/div/button").click();
+    }
+
+    public static void clickOnButtonKurztestsuchen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/value-search/p-panel/div/div[2]/div/div[5]/button").click();
+    }
+
+    public static void clickOnDropdownforKurztest(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/value-search/p-panel/div/div[2]/div/quicktest-search/div[1]/p-dialog/div/div[2]/div/form/div/div[1]/div[2]/p-dropdown/div/div[2]").click();
+    }
+
+    public static void kurztestAuswahl(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/value-search/p-panel/div/div[2]/div/quicktest-search/div[1]/p-dialog/div/div[2]/div/form/div/div[1]/div[2]/p-dropdown/div/div[3]/div/ul/p-dropdownitem[8]/li/span").click();
+    }
+
+    public static void clickOnAkzeptierenButton(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/value-search/p-panel/div/div[2]/div/quicktest-search/div[1]/p-dialog/div/div[2]/div/div/button[1]").click();
+    }
+
+    public static void clickOnFehlerCodeSuchenTab(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/search/div/div[1]/p-tabview/div/ul/li[2]").click();
+    }
+
+    public static void scrollDownThePageToFehlerCode(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/search/div/div[1]/p-tabview/div/div/div/p-tabpanel[2]/div/div/fault-code-tree/p-tree/div/ul/p-treenode[31]/li/div/span[2]/span/div"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToAufbau(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/search/div/div[1]/p-tabview/div/div/div/p-tabpanel[1]/div/div/symptom-tree/p-tree/div/ul/p-treenode[6]/li/div/span[2]/span/div"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToAlleReduzieren(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[1]/iw-header-common/div[1]/div[2]/div[1]/div/div[1]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToTipsDocument(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[2]/div[1]/a/span[2]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToReparaturpakete(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[4]/div[1]/a/span[2]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToTeile(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[6]/div[1]/a/span[2]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToArbeiten(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[5]/div[1]/a/span[2]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToReparaturSuchenButton(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[4]/div[2]/div/div/div/button/span"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToErsatzTeile(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[7]/div[1]/a/span[2]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+
+    public static void scrollDownThePageToUrsacheUndHilfe(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[9]/div[1]/a/span[2]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageToKundenaussage(){
+        WebElement element = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[1]/div[1]/a/span[2]"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
+    public static void scrollDownThePageInSettingNachUntenToEmail(){
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("settingIframe");
+        WebElement element = driver.findElement(By.xpath("/html/body/app-root/settings-selection/p-tabview/div/div/p-tabpanel/div/div[2]/p-panel/div/div[1]/span"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        driver.switchTo().defaultContent();
+    }
+
+    public static void scrollDownThePageInSettingNachUntenToGarantie(){
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("settingIframe");
+        WebElement element = driver.findElement(By.xpath("/html/body/app-root/settings-selection/p-tabview/div/div/p-tabpanel/div/div[3]/p-panel/div/div[1]/span"));
+        moveTheCosorToElement(element);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+        driver.switchTo().defaultContent();
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public static void clickOnTabSymptomsuche(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/search/div/div[1]/p-tabview/div/ul/li[1]").click();
+    }
+
+
+
+    public static void clickOnPfeilStossfaenger(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/search/div/div[1]/p-tabview/div/div/div/p-tabpanel[1]/div/div/symptom-tree/p-tree/div/ul/p-treenode[6]/li/ul/p-treenode[3]/li/div/span[1]").click();
+    }
+
+    public static void clickOnTabStichwortsuche(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/search/div/div[1]/p-tabview/div/ul/li[3]").click();
+    }
+
+    public static void clickOnButtonErstellungBeanstandung(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[1]/div/div[2]/job-search/search/div/div[2]/div[1]/button[1]").click();
+    }
+
+    public static void symptomAuswahl(){
+        element("//*[@id='selectedNodeId-1']").click();
+    }
+
+    public static void checkBoxTippsDocument(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/create-complaint/div[2]/div/div[2]/p-panel/div/div[2]/div/div/div/div/p-table/div/div/table/tbody/tr[1]/td[3]/p-tablecheckbox/div/div[2]").click();
+    }
+
+    public static void clickOnButtonErstellungBeanstandungInTipsDokument(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/create-complaint/div[2]/div/div[2]/div/button").click();
+    }
+
+    public static void markiereSSL(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/create-complaint/div[1]/p-dialog/div/div[2]/div/p-table[1]/div/div/table/tbody/tr/td[1]/div/p-radiobutton/div/div[2]/span").click();
+    }
+
+    public static void markiereAlleArbeit(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/create-complaint/div[1]/p-dialog/div/div[2]/div/div[2]/p-checkbox/div/div[2]").click();
+    }
+
+    public static void tipsDocumentZuordnen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/create-complaint/div[1]/p-dialog/div/div[3]/p-footer/div/button[1]").click();
+    }
+
+    public static void alleReduzieren() throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/expand-collapse/div/div/span[1]/div/span").click();
+        Thread.sleep(2000);
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/expand-collapse/div/div/span[1]/div/span").click();
+    }
+
+
+    public static void clickOnSideMenue(){
+        element("//*[@id='sidePanel']").click();
+    }
+
+    public static void closeSideMenue(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[1]/iw-header-common/div[1]/div[2]/div[4]/function-indicators/div/div[1]/span").click();
+    }
+
+    public static void kundenaussageErweitern(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[1]/div[1]/a/span[2]").click();
+    }
+
+    public static void tipsErweitern(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[2]/div[1]/a/span[2]").click();
+    }
+
+    public static void paketErweitern(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[3]/div[1]/a/span[2]").click();
+    }
+
+    public static void premiumOelServiceBAuswahl(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[3]/div[2]/div/div/packages/div/div[3]/p-table/div/div/table/tbody/tr[8]/td[1]/div[2]/p-radiobutton/div/div[2]/span").click();
+    }
+
+    public static void reparaturpaketeErweitern(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[4]/div[1]/a/span[2]").click();
+    }
+
+    public static void arbeitenErweitern(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[5]/div[1]/a/span[2]").click();
+    }
+
+    public static void reparaturpaketesuchen(String sprache) throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[4]/div[2]/div/div/div/button").click();
+        Thread.sleep(2000);
+        waitForSpinnerNotAppears();
+        alleSuchbegriffeEntfernenUndNeueSuchen(sprache);
+        Thread.sleep(2000);
+
+
+    }
+
+    public static void alleSuchbegriffeEntfernenUndNeueSuchen(String sprache) throws InterruptedException{
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame(element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[4]/div[2]/div/div/div/complaint-rpr-package/div/iframe"));
+        element("//*[@id='ResetBtnOnSearchDetailtlPage']").click();
+        Thread.sleep(2000);
+        if (sprache.contains("cs")){
+            element("//*[@id='keywordChipInput']").sendKeys("turbodmychadlo");
+        }
+        else{
+            element("//*[@id='keywordChipInput']").sendKeys("Abgasturbolader");
+        }
+        Thread.sleep(2000);
+        element("//*[@id='SearchBtnOnSearchDetailtlPage']").click();
+        Thread.sleep(2000);
+        waitForSpinnerNotAppears();
+        element("/html/body/div[1]/app-root/xy-c-frame/div/div[2]/div[1]/div/div/div/rpr-search/div/div[2]/div/div/result/div/table/tr/div/div/div[2]/pw-scrollpanel/div/div[1]/div/p-table/div/div/div/div[2]/table/tbody/tr[1]/td[1]").click();
+        Thread.sleep(2000);
+        waitForSpinnerNotAppears();
+        element("/html/body/div[1]/app-root/xy-c-frame/div/div[2]/div[1]/div/div/div/rpr-search/div/div[3]/div/div/app-package-details/div[1]/div[2]/pw-scrollpanel/div/div[1]/div/div/div[1]/damage-type/ul/li[2]/span/label").click();
+        Thread.sleep(2000);
+        element("/html/body/div[1]/app-root/xy-c-frame/div/div[2]/div[1]/div/div/div/rpr-search/div/div[3]/div/div/app-package-details/div[1]/div[2]/pw-scrollpanel/div/div[1]/div/div/labor-operation/div/p-table/div/div/table/tbody/tr[1]/td[1]/div/span/label").click();
+        Thread.sleep(2000);
+        element("/html/body/div[1]/app-root/xy-c-frame/div/div[2]/div[1]/div/div/div/rpr-search/div/div[3]/div/div/app-package-details/div[1]/div[2]/pw-scrollpanel/div/div[1]/div/div/labor-operation/div/p-table/div/div/table/tbody/tr[2]/td[1]/div/span/label").click();
+        Thread.sleep(2000);
+        driver.switchTo().defaultContent();
+    }
+
+    public static void clickOnButtonUebernehmen(){
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame(element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[4]/div[2]/div/div/div/complaint-rpr-package/div/iframe"));
+        element("/html/body/div[1]/app-root/xy-c-frame/div/div[2]/div[1]/div/div/div/rpr-search/div/div[3]/div/div/app-package-details/div[1]/div[3]/div[2]/button[2]").click();
+        driver.switchTo().defaultContent();
+    }
+
+    public static void aufrufenASRA(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[5]/div[2]/div/div/maintenance-scope/div/div/button[1]/span").click();
+    }
+
+    public static void teileRecherchieren(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[6]/div[2]/div/div/parts/div/div/button[2]").click();
+    }
+
+    public static void clickOnGruppen_47(){
+        element("/html/body/app-root/app-inquiry-main/div[2]/div[2]/div[1]/app-kg-selection/div/ul[2]/li[16]/div/div[2]/span[1]").click();
+    }
+
+    public static void clickOnImageOfTeile_35(){
+        element("/html/body/app-root/app-inquiry-main/div[2]/div[2]/div[2]/div[2]/div/app-tuselection/div/div[2]/ul/li[2]/ul/li/img").click();
+    }
+
+    public static void clickOnWarenkorbVonBauteil(){
+        element("/html/body/app-root/app-inquiry-main/div[2]/div[2]/div/div[1]/div[2]/app-parts-list/div[2]/div/div/ul/li[1]/app-part-row/div/div[3]/div[2]/app-add-to-cart/div/button").click();
+    }
+
+    public static void partsInfoVerlassen(){
+        element("/html/body/app-root/div/app-nav-sidebar/app-sidebar/div/div[2]/app-sidebar-button[1]").click();
+    }
+
+    public static void ursacheUndHilfeErweitern(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[9]/div[1]/a/span[2]").click();
+    }
+
+    public static void anhangErweitern(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/p-accordion/div/p-accordiontab[10]/div[1]/a/span[2]").click();
+    }
+
+    public static void speichernUndSchliessenVorgang(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/complaint/div[2]/div[2]/div/button[1]").click();
+    }
+
+    public static void clickOnTheLupe(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/iw-header-common/div[1]/div[1]/div[3]/div[2]/div/span[1]/span/i").click();
+    }
+
+    public static void anforderungErstellen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/edit-search/search/div/div[2]/div[1]/button[2]").click();
+    }
+
+    public static void anforderungAbbrechen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/request/div/div/button[2]").click();
+    }
+
+    public static void clickOnOkButtonOnPopUp(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/div[1]/p-dialog/div/div[3]/p-footer/div/button").click();
+    }
+
+    public static void vorgangSchliessen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[4]/span").click();
+    }
+
+    public static void clickOnPfeilButtonInJobDetails(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/iw-header-common/div[1]/div[1]/div[3]/div[2]/div/span[3]/i").click();
+    }
+
+    public static void clickOnFahrzeugtestdaten(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/div[2]/div/div[1]/div[2]/div[1]/div/content-button/div").click();
+    }
+
+    public static void telediagnoseStarten(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/short-test/div[1]/div/div/div/td[1]/button").click();
+    }
+
+    public static void kurztestanalyse(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/short-test/div[1]/div/div/div/td[3]/button/span").click();
+    }
+
+    public static void kurztestAnalyseSchliessen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/short-test/div[2]/p-dialog/div/div[3]/p-footer/div/button/span").click();
+    }
+
+    public static void kurztestDetails() throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/short-test/div[1]/div/div/p-table/div/div[2]/table/tbody/tr[1]/td[5]/button/span[1]").click();
+        waitForSpinnerNotAppears();
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame(element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/dda-app/div/iframe"));
+        element("/html/body/app-dda/app-diagnosis-data-viewer/ecu-tab/label[3]/span").click();
+        waitForSpinnerNotAppears();
+        element("/html/body/app-dda/app-diagnosis-data-viewer/ecu-tab/table/tbody/tr[9]/td[1]/div/toggle-button/button/span").click();
+        driver.switchTo().defaultContent();
+
+    }
+
+    public static void kurztestDateilsSchliessen(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/dda-app/div/div/button/span").click();
+    }
+
+    public static void kurztestEntkoppeln(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/short-test/div[1]/div/div/p-table/div/div[2]/table/tbody/tr[7]/td[4]/button/span[1]").click();
+    }
+
+    public static void gobackToJobDetailsFromKurztest(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/short-test/div[1]/iw-header-common/div[1]/div[1]/div[1]/i").click();
+    }
+
+    public static void clickOnFahrzeugInformation(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/div[2]/div/div[1]/div[2]/div[2]/div/content-button/div").click();
+    }
+
+
+    public static void gobackToJobdetailsFromFahrzeugInfo(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/vehicle-information/iw-header-common/div[1]/div[1]/div[1]/i").click();
+    }
+
+    public static void clickOnVorgangInfo(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/div[2]/div/div[1]/div[2]/div[3]/div/content-button/div").click();
+    }
+
+    public static void gobackToJobdetailsFromJobInfo(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-information/iw-header-common/div[1]/div[1]/div[1]/i").click();
+    }
+
+    public static void clickOnReparaturPakete(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/div[2]/div/div[1]/div[2]/div[7]/div/content-button/div").click();
+    }
+
+    public static void reparaturPaketeSuchen_2( String sprache){
+        driver.switchTo().defaultContent();
+        driver.switchTo().frame("iw-rpr-iframe");
+        if (sprache.contains("cs")){
+            element("//*[@id='keywordChipInput']").sendKeys("turbodmychadlo");
+        }
+        else{
+            element("//*[@id='keywordChipInput']").sendKeys("Abgasturbolader");
+        }
+        element("//*[@id='SearchBtnOnSearchDetailtlPage']").click();
+        driver.switchTo().defaultContent();
+    }
+
+    public static void gobackToJobdetailsFromReparaturPakete(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/rpr/iw-header-common/div[1]/div[1]/div[1]/i").click();
+    }
+
+
+
+    public static void vorgangArchivieren(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[2]/p-table/div/div/table/tbody/tr[1]/td[11]/div/button/img").click();
+    }
+
+    public static void vorgangArchivierenJa(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/p-dialog[1]/div/div[3]/p-footer/div/button[1]/span").click();
+    }
+
+    public static void clickOnArchivTab(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[3]/a/span").click();
+    }
+
+    public static void archivPopup() throws InterruptedException{
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[3]/div/archived-job/div/div[2]/p-table/div/div/table/tbody/tr[1]/td[1]/div/div").click();
+        waitForSpinnerNotAppears();
+        Thread.sleep(2000);
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[3]/div/archived-job/job-readonly-dialog/p-dialog/div/div[2]/div/div/p-accordion/div/div[1]/div/p-accordiontab/div[1]/a/span[1]").click();
+
+    }
+
+    public static void closeArchivPopup(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[3]/div/archived-job/job-readonly-dialog/p-dialog/div/div[3]/p-footer/div[2]/div/button/span").click();
+    }
+
+    public static void clickOnEinstellungButton(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[4]/a/span[1]").click();
+    }
+
+    public static void clickOnWis(){
+        element("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/div[2]/div/div[1]/div[2]/div[10]/div/content-button/div").click();
+    }
+
+
+
+
+
+
+
+
+    //Text Replace
+    public static void executeScript(String text, WebElement element){
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].innerHTML= '"+text+"';",element);
+    }
+
+    public static void textReplace_2_Aufruf_XIW(){
+        WebElement outletUser = driver.findElement(By.xpath("//*[@id='xf-frame-user-name']"));
+        WebElement outletName= driver.findElement(By.xpath("//*[@id='xf-frame-outlet-name']"));
+        WebElement willKommenText = driver.findElement(By.xpath("/html/body/app-root/div/div/div[1]/app-welcome/div[2]/div/div"));
+        executeScript("0000 Musterbetrieb", outletName);
+        executeScript("Max Mustermann", outletUser);
+        System.out.println("text is dsgsagad:"+element("/html/body/app-root/div/div/div[1]/app-welcome/div[2]/div/div").getText());
+        String string = element("/html/body/app-root/div/div/div[1]/app-welcome/div[2]/div/div").getText().replaceAll("\\r\\n|\\r|\\n", " ");
+        String[] parts = string.split(",");
+        System.out.println(string);
+
+        executeScript(parts[0]+"<br>"+UIConstants.SERVICE_BERATER+"!", element("/html/body/app-root/div/div/div[1]/app-welcome/div[2]/div/div"));
+    }
+
+    public static void textReplace_2_XENTRY_Portal_Rahmen(){
+        WebElement menueUser = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/nav[3]/div/div[2]/div/span[2]"));
+        WebElement menueBetrieb = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/nav[3]/div/div[3]/div/div/div[2]"));
+        WebElement betriebID = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/nav[3]/div/div[3]/div/div/div[1]"));
+        executeScript("0000 - ", betriebID);
+        executeScript("Musterbetrieb", menueBetrieb);
+        executeScript("Max Mustermann", menueUser);
+
+    }
+
+    public static void textReplace_2_Servicebetrieb_Wechseln(){
+        for (int i=1; i<5; i++){
+            WebElement betriebName = driver.findElement(By.xpath("/html/body/div[1]/div[3]/div/div[2]/div/div["+i+"]/span[1]"));
+            executeScript("0000 Musterbetrieb", betriebName);
+        }
+    }
+
+    public static void textReplace_2_Suche(){
+        WebElement outletUser = driver.findElement(By.xpath("//*[@id='xf-frame-user-name']"));
+        WebElement outletName= driver.findElement(By.xpath("//*[@id='xf-frame-outlet-name']"));
+        executeScript("0000 Musterbetrieb", outletName);
+        executeScript("Max Mustermann", outletUser);
+    }
+
+
+    public static void textReplace_2_Jobauswahl(){
+        //Fin
+        for (int i=1; i<21; i++){
+            WebElement fin = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[2]/p-table/div/div/table/tbody/tr["+i+"]/td[3]/div/div"));
+            executeScript("WDD1234567A891011", fin);
+        }
+        //Techniker
+        for (int i=1; i<21; i++){
+            WebElement fin = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[2]/div/job-selection/div/div[2]/p-table/div/div/table/tbody/tr["+i+"]/td[9]/div/div"));
+            executeScript("Jack Mustermann", fin);
+        }
+
+    }
+
+    public static void textReplace_2_Vorganguebersicht_Popup(){
+        WebElement fin = driver.findElement(By.xpath("//*[@id='ui-dialog-10-label']"));
+        executeScript("WDD1234567A891011", fin);
+    }
+
+    public static void textReplace_2_Inhalt_Job(){
+        WebElement schildTab = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/ul/li[4]/a/span"));
+        executeScript("XX-XX 0000", schildTab);
+        WebElement fin = driver.findElement(By.xpath("/html/body/xiw-app/div/job-selection-search/div[1]/p-tabview/div/div/p-tabpanel[4]/div/div/job-content/div/iw-header-common/div[1]/div[2]/div[1]/div/div[1]"));
+        executeScript("FIN: WDB1234567A891011", fin);
+        WebElement licenseNumber = driver.findElement(By.xpath("//*[@id='licensePlateNumber']"));
+        licenseNumber.clear();
+        licenseNumber.sendKeys("XX-XX 0000");
+    }
+
+
+
 
 
 }

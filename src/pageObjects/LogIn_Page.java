@@ -8,7 +8,49 @@ import org.openqa.selenium.WebElement;
 public class LogIn_Page {
     private static WebDriver driver;
 
+    public static void timeDelay(long t) {
+        try {
+            Thread.sleep(t);
+        } catch (InterruptedException e) {}
+    }
+
+    public static WebElement elementWithXpath(String xpath){
+        int timeToSleep = 0;
+        Boolean elementIsExist = driver.findElements(By.xpath(xpath)).isEmpty();
+        Boolean elementIsEnable = driver.findElement(By.xpath(xpath)).isEnabled();
+        Boolean elementIsDisplayed = driver.findElement(By.xpath(xpath)).isDisplayed();
+        while((elementIsExist || !elementIsDisplayed || !elementIsEnable)  && timeToSleep < 60000){
+            timeToSleep = timeToSleep+1000;
+            timeDelay(1000);
+            System.out.print("Warte auf Element"+"\n");
+            elementIsExist = driver.findElements(By.xpath(xpath)).isEmpty();
+            elementIsEnable = driver.findElement(By.xpath(xpath)).isEnabled();
+            elementIsDisplayed = driver.findElement(By.xpath(xpath)).isDisplayed();
+        }
+        return driver.findElement(By.xpath(xpath));
+    }
+
+
+    public static WebElement elementWithID(String id){
+        int timeToSleep = 0;
+        Boolean elementIsExist = driver.findElements(By.id(id)).isEmpty();
+        Boolean elementIsEnable = driver.findElement(By.id(id)).isEnabled();
+        Boolean elementIsDisplayed = driver.findElement(By.id(id)).isDisplayed();
+        while((elementIsExist || !elementIsDisplayed || !elementIsEnable)   && timeToSleep < 60000){
+            timeToSleep = timeToSleep+1000;
+            timeDelay(1000);
+            System.out.print("Warte auf Element"+"\n");
+            elementIsExist = driver.findElements(By.id(id)).isEmpty();
+            elementIsEnable = driver.findElement(By.id(id)).isEnabled();
+            elementIsDisplayed = driver.findElement(By.id(id)).isDisplayed();
+        }
+        return driver.findElement(By.id(id));
+    }
+
+
     public static void clickOnsignInButton(){
+        elementWithXpath("//button[@class='xf-signin-button']").click();
+        /*
         boolean staleElement = true;
         while(staleElement){
             try{
@@ -18,7 +60,7 @@ public class LogIn_Page {
             } catch (StaleElementReferenceException e){
                 staleElement = true;
             }
-        }
+        }*/
     }
 
     public static void clickOnElement(WebElement element){
@@ -34,27 +76,23 @@ public class LogIn_Page {
     }
 
     public static WebElement userNameField(){
-        WebElement username = driver.findElement(By.id("userid"));
-        return username;
+        return elementWithID("userid");
     }
 
     public static WebElement nextButtonforSignIn(){
-        WebElement nextButton = driver.findElement(By.id("next-btn"));
-        return nextButton;
+        return elementWithID("next-btn");
     }
 
     public static WebElement passWordField(){
-        WebElement password = driver.findElement(By.id("password"));
-        return password;
+        return elementWithID("password");
     }
 
     public static WebElement submitButtonForLogin(){
-        WebElement loginSubmitButton = driver.findElement(By.id("loginSubmitButton"));
-        return loginSubmitButton;
+        return elementWithID("loginSubmitButton");
     }
 
     public static void enterUserName(String username){
-        clickOnElement(userNameField());
+        userNameField().click();
         userNameField().sendKeys(username);
     }
 
@@ -63,12 +101,18 @@ public class LogIn_Page {
     }
 
     public static void enterPassWord(String password){
-        clickOnElement(passWordField());
+        passWordField().click();
         passWordField().sendKeys(password);
     }
 
     public static void clickOnSubmitButton(){
-        clickOnElement(submitButtonForLogin());
+        submitButtonForLogin().click();
+    }
+
+    public static void cookiesAkzep() {
+        if (!driver.findElements(By.id("uc-btn-accept-banner")).isEmpty()){
+            driver.findElement(By.id("uc-btn-accept-banner")).click();
+        }
     }
 
 

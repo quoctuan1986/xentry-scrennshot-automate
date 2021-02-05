@@ -3,8 +3,14 @@ package pageObjects;
 public final class UIConstants {
     public static final String USER_NAME = "trantua";
     public static final String PASWORD = "Vz.tobe9hyvv";
+    public static final String USER_NAME_TOBI = "TWEISHA";
+    public static final String PASWORD_TOBI = "zipp-Klirr29!!uck";
     public static final String URL_XENTRY = "https://xentry-int2.daimler.com/home/";
+    public static final String URL_XENTRY_PROD = "https://xentry.daimler.com/home/";
     public static final String URL_WHO_IS_WHO = "https://gems-int.daimler.com/dwiw/index.jsf";
+    public static final String URL_WHO_IS_WHO_PROD = "https://gems.daimler.com/dwiw/index.jsf";
+
+
 //PKW
     public static final String TEST_FIN_OFFER_IN_PROGRESS = "WDD2130421A467126";
     public static final String TEST_FIN_OFFER_SENT = "WDD2130421A467032";
@@ -24,13 +30,15 @@ public final class UIConstants {
     public static final String TRUCK_TEST_FIN_PROGRESS = "WDB96340310264353";
 
 //BUS
-    public static final String BUS_TEST_FIN = "WEB62825613135679";
-    public static final String BUS_TEST_FIN_SENT = "WEB62825513131838";
-    public static final String BUS_TEST_FIN_SENT_2 = "WEB41055013280963";
+    public static final String BUS_TEST_FIN = "WEB62863113134244";
+    public static final String BUS_TEST_FIN_SENT = "WKK41025013112123";
+    public static final String BUS_TEST_FIN_SENT_2 = "WKK41014013126748";
     public static final String BUS_TEST_FIN_PROGRESS = "WEB62864013133490";
+    public static final String BUS_TEST_FIN_VEREINBAREN = "WEB62803110604710";
 
 
-//PKW
+
+    //PKW
     public static final String PKW_COCKPIT_FAHRZEUG_LIST = "Pkw_Cockpit_Fahrzeugliste";
     public static final String ARCHIV_ÜBERSICHT = "Archiv_Uebersicht";
     public static final String PKW_ANGEBOT_1 = "Pkw_Angebot_1";
@@ -38,7 +46,7 @@ public final class UIConstants {
     public static final String PKW_ANGEBOT_3 = "Pkw_Angebot_3";
     public static final String PKW_COCKPIT_FAHRZEUGDETAILS = "Pkw_Cockpit_Fahrzeugdetails";
     public static final String PKW_COCKPIT_KUNDENINFO = "Pkw_Cockpit_Kundeninfo";
-    public static final String PKW_FILTERMENÜ = "Pkw_Cockpit_Such_Und_Filtermenü";
+    public static final String PKW_FILTERMENÜ = "Pkw_Cockpit_Such_Und_Filtermenue";
     public static final String PKW_COCKPIT_TD_GRUNDDATEN = "Pkw_Cockpit_TD_Grunddaten";
     public static final String PKW_ZUSATZINFORMATION = "Pkw_Cockpit_Zusatzinformation";
     public static final String PKW_SM_ANGEBOT_BEARBEITEN = "Pkw__SM_Angebot_bearbeiten_all";
@@ -87,6 +95,8 @@ public final class UIConstants {
     public static final String PkW_ANGEBOT_ARCHIV_DETAILS ="Pkw_Angebotsarchiv_Details";
     public static final String PkW_OFFER_TERMIN_VEREINBAREN ="Pkw_Offer_Termin_vereinbart";
     public static final String PkW_OFFER_PAKETE_PREIS_AUSWAHL ="Pkw_Pakete_Preisauswahl";
+    public static final String PkW__OFFER_TERMIN_HINZUFUEGEN ="Pkw_Offer_Termin_hinzufuegen";
+
 
 
 
@@ -113,7 +123,7 @@ public final class UIConstants {
     public static final String VAN_ANGEBOT_3 = "VAN_Angebot_3";
     public static final String VAN_COCKPIT_FAHRZEUGDETAILS = "VAN_Cockpit_Fahrzeugdetails";
     public static final String VAN_COCKPIT_KUNDENINFO = "VAN_Cockpit_Kundeninfo";
-    public static final String VAN_FILTERMENU = "VAN_Cockpit_Such_Und_Filtermenü";
+    public static final String VAN_FILTERMENU = "VAN_Cockpit_Such_Und_Filtermenue";
     public static final String VAN_COCKPIT_TD_GRUNDDATEN = "VAN_Cockpit_TD_Grunddaten";
     public static final String VAN_ZUSATZINFORMATION = "VAN_Cockpit_Zusatzinformation";
     public static final String VAN_SM_ANGEBOT_BEARBEITEN = "VAN_SM_Angebot_bearbeiten_all";
@@ -161,6 +171,8 @@ public final class UIConstants {
     public static final String VAN_ANGEBOT_ARCHIV_DETAILS ="VAN_Angebotsarchiv_Details";
     public static final String VAN_OFFER_TERMIN_VEREINBAREN ="VAN_Offer_Termin_vereinbart";
     public static final String VAN_OFFER_PAKETE_PREIS_AUSWAHL ="VAN_Pakete_Preisauswahl";
+    public static final String VAN_OFFER_TERMIN_HINZUFUEGEN ="VAN_Offer_Termin_hinzufuegen";
+
 
 
 
@@ -237,12 +249,31 @@ public final class UIConstants {
     public static final String BUS_OFFER_KUNDENGESPRAECH_ANGENOMMEN = "Bus_Offer_Kundengespraech_angenommen";
     public static final String BUS_OFFER_KUNDENGESPRAECH_ABLEHNEN = "Bus_Offer_Kundengespraech_abgelehnt";
     public static final String BUS_NOTIFICATION = "Bus_Notification";
+    public static final String BUS_SETTING_BENUTZER_EINSTELLUNGEN = "Bus_Benutzereinstellungen";
 
-//Auftragsmangement Trucks
+    public static final String BUS_FAHRZEUGDATEN_LEBENSLAUF ="Bus_Fahrzeugdaten_Lebenslauf";
+    public static final String BUS_SERVICE_VERTRAGSDETAILS = "Bus_Servicevertragsdetails";
+    public static final String BUS_OFFER_TERMINLISTE ="Bus_Offer_Terminliste";
+    public static final String BUS_OFFER_TERMIN_VEREINBAREN ="Bus_Offer_Termin_vereinbart";
+    public static final String BUS_ANGEBOT_ARCHIV ="Bus_Angebotsarchiv";
+    public static final String BUS_ANGEBOT_ARCHIV_DETAILS ="Bus_Angebotsarchiv_Details";
+
+
+
+
+
+
+
+
+    //Auftragsmangement Trucks
     public static final String KENNZEICHEN = "AuftragsM-2031";
     public static final String KENNZEICHEN_2 = "AuftragsM-2032";
     public static final String KENNZEICHEN_EN = "EN-AuftragsM-2031";
     public static final String KENNZEICHEN_EN_2 = "EN-AuftragsM-2032";
+    public static final String KENNZEICHEN_3 = "AuftragsM-2033";
+    public static final String KENNZEICHEN_EN_3 = "EN-AuftragsM-2033";
+
+
 
 
 
@@ -283,12 +314,23 @@ public final class UIConstants {
     public static final String TC_ARCHIV_LIST_OVERLAY = "TC_Archiv_Overlay";
     public static final String TC_ARCHIV_OPEN = "TC_Archiv_Detailansicht";
     public static final String TC_KURZ_TEST_ANALYSE = "TC_Kurztest_Kurztestanalyse";
+    public static final String TC_WARTUNG_RUDIMENTAER = "TC_Wartung_rudimentaer";
+    public static final String TC_KUNDENDATEN_CCDB_SEARCH = "TC_Kundendaten_CCDB_Search";
+    public static final String TC_KUNDENDATEN_CCDB_MERGE = "TC_Kundendaten_CCDB_Merge";
+    public static final String TC_KUNDENDATEN_CCDB_UEBERNOMMEN = "TC_Kundendaten_CCDB_Kundendaten_uebernommen";
+    public static final String TC_NOTIFICATION = "TC_Notification";
+
+
+
+
+
 
 
 
     //Auftragsmanagement PKW
     public static final String KENNZEICHEN_PKW = "S-WR 1";
     public static final String KENNZEICHEN_PKW_2 = "S-WR 3";
+    public static final String FIN = "WDD2130501A253633";
 
 
 
@@ -354,9 +396,27 @@ public final class UIConstants {
     public static final String KUNDEN_DIALOG_KUNDEN_AUFTRAG_VERSENDEN = "Auftrag versenden";
     public static final String KUNDEN_DIALOG_MB_ZUBEHOER = "MB_ZubehoerNeuer_Screens_ODUS";
     public static final String KUNDEN_DIALOG_UAT_SERVICEVERTRAG_DETAILS = "Kundendialog_UAT_Servicevertrag_Detailansicht";
-    public static final String KUNDEN_DIALOG_UAT = "Kundendialog_UAT";
+    public static final String KUNDEN_DIALOG_UAT = "Kundendialog_UAT_Mme";
     public static final String KUNDEN_DIALOG_ANSICHT_UAT = "Kundendialog_ANSICHT_UAT";
     public static final String KUNDEN_DIALOG_SERVICE_SELECT_UAT = "Kundendialog_Service_Select_UAT";
+    public static final String KUNDEN_DIALOG_RC_OFFEN_PP = "RC_Offene_PP";
+    public static final String KUNDEN_DIALOG_RC_DELEGATE_PP = "RC_Delegierte_PP";
+    public static final String KUNDEN_DIALOG_RC_JA_NEIN_PP = "RC_Ja_Nein_PP";
+    public static final String KUNDEN_DIALOG_RC_BILD_PP = "RC_Bild_PP";
+    public static final String KUNDEN_DIALOG_RC_IO_NIO_PP = "RC_IO_NIO_PP";
+    public static final String KUNDEN_DIALOG_RC_RAEDER_REIFEN_PP = "RC_Raeder_Reifen_PP";
+    public static final String KUNDEN_DIALOG_RC_NAVI_PP = "RC_Navi_PP";
+    public static final String KUNDEN_DIALOG_RC_Rel_nRel_PP = "RC_Rel_nRel_PP";
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -380,6 +440,17 @@ public final class UIConstants {
     public static final String TC_KUNDEN_DIALOG_UAT_SERVICEVERTRAG_DETAILS = "TC_Kundendialog_UAT_Servicevertrag_Detailansicht";
     public static final String TC_KUNDEN_DIALOG_UAT = "TC_Kundendialog_UAT";
 
+    public static final String TC_KUNDEN_DIALOG_RCT_OFFEN_PRUFPUNKT = "TC_Kundendialog_RCT_offenePruefpunkte";
+    public static final String TC_KUNDEN_DIALOG_RCT_DELEGATE_PRUFPUNKT = "TC_Kundendialog_RCT_delegiertePruefpunkte";
+    public static final String TC_KUNDEN_DIALOG_RCT_BILD_PRUFPUNKT = "TC_Kundendialog_RCT_Bildpruefung";
+    public static final String TC_KUNDEN_DIALOG_RCT_OK_NOK = "TC_Kundendialog_RCT_OK_NOK";
+    public static final String TC_KUNDEN_DIALOG_RCT_NAVI_KARTE = "TC_Kundendialog_RCT_Navi_Kartendatenstand";
+    public static final String TC_KUNDEN_DIALOG_RCT_RAEDER_REIFEN = "TC_Kundendialog_RCT_Raeder_Reifen";
+
+
+
+
+
 
 
 
@@ -390,6 +461,8 @@ public final class UIConstants {
     public static final String TC_CHECK_AUSSENSEITE = "TC_Bildpruefung_Aussenseite_Beanstandung hinzufuegen";
     public static final String TC_CHECK_AUSSENSEITE_NOK = "TC_Bildpruefung_Außenseite_NOK";
     public static final String TC_CHECK_RADER = "TC_Raeder_2_unbearbeitet";
+    public static final String TC_CHECK_RADER_2 = "TC_Raeder_2_unbearbeitet_2";
+
     public static final String TC_CHECK_RADER_AENDERUNG_ACHSEN = "TC_Raeder_1_Aenderung achsen";
     public static final String TC_CHECK_RADER_BEFUND_POSITION = "TC_Raeder_3_Befundpositionierung";
     public static final String TC_CHECK_RADER_REIFENDRUCK_ERFASSEN = "TC_Raeder_Reifendruck erfasst";
@@ -401,6 +474,7 @@ public final class UIConstants {
     public static final String TC_CHECK_FAHRZEUG_DATEN_NAVIGATION = "TC_Navigations_PP_Beanstandung hinzufuegen";
     public static final String TC_CHECK_WARTUNG_AKT = "TC_Wartung_AKT";
     public static final String TC_CHECK_WARTUNG_MANUELL = "TC_Wartung_manuell";
+
 
 
 //CarCheck_PKW
@@ -432,6 +506,8 @@ public final class UIConstants {
     public static final String CC_VORGANG_FAHRZEUG_CHECK_JA_NEIN_UEBERSICHT = "17_CC_JA_NEIN_Uebersicht";
     public static final String CC_VORGANG_FAHRZEUG_CHECK_ZUSATZARBEIT = "27_CC_Zusatzarbeiten_2";
     public static final String CC_VORGANG_FAHRZEUG_CHECK_PROFIL_REIFENDRUCK = "11_CC_Profiltiefe_Reifendruck";
+    public static final String CC_VORGANG_FAHRZEUG_CHECK_PROFIL_REIFENDRUCK_2 = "11_CC_Profiltiefe_Reifendruck_2";
+
     public static final String CC_VORGANG_FAHRZEUG_CHECK_ACHSEN_AUSWAHL = "20_CC_Achsenauswahl";
     public static final String CC_VORGANG_FAHRZEUG_CHECK_BEFUND_POSITION = "12_CC_Befund_positionieren";
     public static final String CC_VORGANG_FAHRZEUG_CHECK_REIFENDRUCK_ERFASSEN = "13_CC_Profiltiefe_Reifendruck_erfasst";
@@ -470,6 +546,115 @@ public final class UIConstants {
     public static final String CHECKPUNKT_S_DE_LANG = "Beschreibung Zweigbetrieb-Prüfpunkt";
     public static final String CHECKPUNKT_S_EN_KURZ = "Suboutlet checkpoint";
     public static final String CHECKPUNKT_S_EN_LANG = "Description suboutlet checkpoint";
+
+
+    //Workshop
+    public static final String WORKSHOP_AUFRUF_XIW = "2_Aufruf_XIW";
+    public static final String WORKSHOP_XENTRY_PORTAL_RAHMEN = "2_XENTRY_Portal_Rahmen";
+    public static final String WORKSHOP_SERVICEBETRIEB_WECHSELN = "2_Servicebetrieb_wechseln";
+    public static final String WORKSHOP_SUPPORT_ANFRAGEN = "2_Supportanfrage";
+    public static final String WORKSHOP_SUCHE = "2_Screenaufbau_Suche";
+    public static final String WORKSHOP_JOBAUSWAHL = "2_Screenaufbau_Jobauswahl";
+    public static final String WORKSHOP_VORGANGUEBERSICHT_POPUP = "2_Vorgangsuebersicht_Pop-up";
+    public static final String WORKSHOP_MARKT_BENACHRICHTIGUNG= "2_Screenaufbau_Marktbenachrichtigungen";
+    public static final String WORKSHOP_INHALT_JOB= "2_Inhaltsuebersicht_Job";
+    public static final String WORKSHOP_FIN_EINGABE_POPUP= "3_FIN-Eingabe_Popup";
+    public static final String WORKSHOP_FIN_EINGABE= "3_FIN-Eingabe";
+    public static final String WORKSHOP_KURZTEST_ANFORDERN ="3_Neuer_Kurztest_TD_anfordern";
+    public static final String WORKSHOP_SUCHE_FEHLERCODE ="3_Suche_Fehlercodesuche_2";
+    public static final String WORKSHOP_SUCHE_SYMPTOM ="3_Suche_Symptomsuche";
+    public static final String WORKSHOP_SUCHE_STICHWORT ="3_Suche_Stichwortsuche";
+    public static final String WORKSHOP_SUCHE_TIPS ="4._Suche-Reiter_TIPS-Suche_2";
+    public static final String WORKSHOP_TIPS_DOKUMENT_ZUORDNEN ="4._TIPS-_Dokument_zuordnen";
+    public static final String WORKSHOP_BEANST_UEBERSICHT ="4._Beanstandung_Uebersicht";
+    public static final String WORKSHOP_SIDE_NAVIGATION ="4._Side_Navigation_TB";
+    public static final String WORKSHOP_KUNDENAUSSAGE ="4._Kundenaussage_und_Umgebungsdaten";
+    public static final String WORKSHOP_TIPS_PAKET ="4._TIPS_und_Pakete_2";
+    public static final String WORKSHOP_RPR ="4._RPR";
+    public static final String WORKSHOP_RPR2 ="4._RPR2";
+    public static final String WORKSHOP_TEILE ="4._Teile";
+    public static final String WORKSHOP_ARBEITEN ="4._Arbeiten";
+    public static final String WORKSHOP_TEILE_XP_INFO ="4._Teile_XP_Teileinformation";
+    public static final String WORKSHOP_TEILE_XP_INFO_2 ="4._Teile_XP_Teileinformation_2";
+    public static final String WORKSHOP_TEILE_HINZUFUEGEN ="4._Teile_Hinzugefuegt";
+    public static final String WORKSHOP_ERSATZTEILE ="4._Ersatzteile_und_SSL";
+    public static final String WORKSHOP_URSACHE_HILFE ="4._Ursache_und_Abhilfe";
+    public static final String WORKSHOP_ANHANG ="4._Anhaenge_und_Speichern";
+    public static final String WORKSHOP_INHALT ="5._Inhaltsuebersicht";
+    public static final String WORKSHOP_SUCHE_KUNDENWUNSCH_ANFORDERUNG ="4._Suche-Reiter_Kundenwunsch_Anforderung_anlegen";
+    public static final String WORKSHOP_JOB_ENRICHMENT ="5._Job_Aufruf_Enrichment_Pop-Up";
+    public static final String WORKSHOP_PFEIL_AUSKLAPP ="5._Pfeil_ausgeklappt_Inhaltsuebersicht";
+    public static final String WORKSHOP_FAHRZEUG_TEST_DATEN ="5._Fahrzeugtestdaten";
+    public static final String WORKSHOP_KURZTEST_ANALYSE ="4_Kurztestanalyse";
+    public static final String WORKSHOP_KURZTEST_DETAILS ="4._Kurztestdetails";
+    public static final String WORKSHOP_FAHRZEUG_INFO ="5._Fahrzeuginformation";
+    public static final String WORKSHOP_JOB_INFO ="5._Vorgangsdetails-Job_information";
+    public static final String WORKSHOP_RPR_INHALT_UEBERSICHT ="5._RPR_aus_Inhaltsuebersicht";
+    public static final String WORKSHOP_ARCHIVIEREN_POPUP ="6._Archivieren_Pop-Up";
+    public static final String WORKSHOP_ARCHIV ="6._Vorgangsarchiv";
+    public static final String WORKSHOP_ARCHIV_POPUP ="6._Vorgangsarchiv_Pop-up";
+    public static final String WORKSHOP_EINSTELUNG ="7._Eigene_Einstellungen";
+    public static final String WORKSHOP_EINSTELUNG_EMAIL_BENACH ="7._Einstellungen_E-Mail_Benachrichtigungen";
+    public static final String WORKSHOP_EINSTELUNG_VORGANG ="7._Einstellungen_Vorgangsauswahl";
+    public static final String WORKSHOP_EINSTELUNG_SIDEMENU ="7._Einstellungen_aufrufen_Sidemenu";
+    public static final String WORKSHOP_Suche_AUS_INHALT ="5._Suche_aus_Inhaltsuebersicht";
+    public static final String WORKSHOP_WARTUNG_SERVICE ="5._Wartung_und_Service";
+
+
+
+
+    //Text Replace
+    public static final String SERVICE_BERATER ="Jack Mustermann";
+    public static final String BETRIEB ="985143 Musterbetrieb";
+    public static final String BETRIEB_CODE ="985143";
+    public static final String BETRIEB_NAME ="Musterbetrieb";
+    public static final String KENNZEICHEN_TEXTREPLACE ="S-MB-XX";
+    public static final String KUNDEN_NAME="Emilia Musterfrau";
+    public static final String KUNDEN_VORNAME="Emilia";
+    public static final String KUNDEN_NACHNAME="Musterfrau";
+    public static final String FIN_PKW="WDD1110987A654321";
+    public static final String FIN_TRUCK="WDB1110987A654321";
+    public static final String FIN_BUS="WEB1110987A654321";
+    public static final String GEBURTSDATUM="01.01.1970";
+    public static final String FIRMENNAME="Musterfirma GmbH & Co. KG";
+    public static final String STRASSE="Musterstraße";
+    public static final String PLZ="5000";
+    public static final String STADT="Musterstadt";
+    public static final String LAND="Musterland";
+    public static final String EMAIL="emilia.musterfrau@email.com";
+    public static final String TELEFON="+ 49 123 456 789 10 0";
+    public static final String MOBILE="+ 49 176 00 00 00 123";
+    public static final String FAX="+ 49 123 456 789 10 1";
+    public static final String SERVICE_NUMMER="N0XXL";
+    public static final String SERVICE_NUMMER_2="N1XXL";
+    public static final String LEGAL_FOOTER="Mercedes-Benz AG Niederlassung Musterstadt";
+    public static final String ANGEBOT_NUMMER = "DE123456789101112";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
